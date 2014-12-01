@@ -15,14 +15,11 @@ module sha_core(
 		output wire [32:0] coreOutput	   
 		);
 
-   reg [255:0] 			   coreNextData;
-   reg [255:0] 			   coreCurrData;
-   reg [511:0] 			   wordNextData;
-   reg [511:0] 			   wordCurrData;   
    // when count is 63 check first32
    //Core
-   
-   
+   reg [255:0] coreNextData;
+   reg [255:0] coreCurrData;
+
    always_ff @(posedge clk)
      begin : coreflipflop
 	if(cycle == 0)
@@ -50,7 +47,8 @@ module sha_core(
 		 );
    
    //Word
-
+   reg [511:0] wordNextData;
+   reg [511:0] wordCurrData;
 
    always_ff @(posedge clk)
      begin : dataflip_flop
@@ -73,7 +71,7 @@ module sha_core(
 			.clk(clk), 
 			.count(cycle),
 			.nonce(nonce),
-			.data_in(coreCurrData[31:0]),
+			.data_in(coreCurrData),
 			.flag_plus_nonce(coreOutput)
 			);
    

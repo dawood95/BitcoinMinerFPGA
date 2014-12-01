@@ -6,24 +6,24 @@
 // Version:     1.0  Initial Design Entry
 // Description: nonce Counter
 
-module nonceCounter
+module nonceCounter 
   #(
-    parameter N_CORE = 1
+    parameter NCORE = 1
     )
    (
     input wire 	       clk,
-    input wire 	       n_rst,
-    input wire 	       cycle,
+    input wire 	       clearCounter,
+    input wire [5:0]   cycle,
     output wire [31:0] nonce
-    );
+   );
 
+   wire [31:0] 	       roll;
    reg 		       enable;
-   reg 		       clear;
 
-   enable = (cycle == ) ? 1'b1 : 0;
-   clear = () ? 1'b1 : 0;
+   assign roll = 32'd4294967295 / NCORE;
+   assign enable = (cycle == 0) ? 1'b1 : 0;
    
-   counter #(32) cnt(.clk(clk),.n_rst(n_rst),.clear(clear),.enable(enable),.rollover_val(32'd4294967295),.count_out(nonce));
+   counter #(32) cnt(.clk(clk),.n_rst(clearCounter),.enable(enable),.rollover_val(roll),.count_out(nonce));
    
    
 endmodule // nonceCounter

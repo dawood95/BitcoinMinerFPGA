@@ -52,22 +52,22 @@ module sha_datashift(
    assign d15 = dataInput[479:448];
    assign d16 = dataInput[511:480];
 
-   assign dataOutput[31:0] = d2;
-   assign dataOutput[63:32] = d3;
-   assign dataOutput[95:64] = d4;
-   assign dataOutput[127:96] = d5;
-   assign dataOutput[159:128] = d6;
-   assign dataOutput[191:160] = d7;
-   assign dataOutput[223:192] = d8;
-   assign dataOutput[255:224] = d9;
-   assign dataOutput[287:256] = d10;
-   assign dataOutput[319:288] = d11;
-   assign dataOutput[351:320] = d12;
-   assign dataOutput[383:352] = d13;
-   assign dataOutput[415:384] = d14;
-   assign dataOutput[447:416] = d15;
-   assign dataOutput[479:448] = d16;
-   assign dataOutput[511:480] = adder_out3;
+   assign dataInput[31:0] = d2;
+   assign dataInput[63:32] = d3;
+   assign dataInput[95:64] = d4;
+   assign dataInput[127:96] = d5;
+   assign dataInput[159:128] = d6;
+   assign dataInput[191:160] = d7;
+   assign dataInput[223:192] = d8;
+   assign dataInput[255:224] = d9;
+   assign dataInput[287:256] = d10;
+   assign dataInput[319:288] = d11;
+   assign dataInput[351:320] = d12;
+   assign dataInput[383:352] = d13;
+   assign dataInput[415:384] = d14;
+   assign dataInput[447:416] = d15;
+   assign dataInput[479:448] = d16;
+   assign dataInput[511:480] = adder_out3;
 
    s0 s0_1(.i(d2),.o(sig0));
    s1 s1_1(.i(d15),.o(sig1));

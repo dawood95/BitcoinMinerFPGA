@@ -14,6 +14,7 @@ module counter
    (
     input wire 		clk,
     input wire 		n_rst,
+    input wire 		clear,
     input wire 		enable,
     input wire [N-1:0] 	rollover_val,
     output wire [N-1:0] count_out
@@ -26,6 +27,8 @@ module counter
    always_ff @(posedge clk, negedge n_rst)
      begin 
 	if(n_rst == 0)
+	  q_cnt <= 0;
+	else if(clear == 1'b1)
 	  q_cnt <= 0;
 	else if(enable == 1'b1)
 	  q_cnt <= (q_cnt == rollover_val) ? 0 : q_cnt+1;

@@ -44,8 +44,6 @@ module sha_math(
    
    reg [31:0] 			    a_s0;
    reg [31:0] 			    e_s1;
-   reg [31:0] 			    a_s01;
-   reg [31:0] 			    e_s11;
    reg [31:0] 			    maj1;
    reg [31:0] 			    maj2;
    reg [31:0] 			    ch1;
