@@ -11,7 +11,8 @@ Top Level : SHA Block
 | flag | Asserted if a nonce has been found
 | goldenNonce | Correct nonce when the flag is asserted
 
-Stuff that don't work : 
+Stuff that don't work 
+---------------------
   - SHA Block mapped test bench (source test bench works, mapped syntesis of SHA block works) 
 
 
