@@ -5,7 +5,7 @@ ECE 337  Bitcoin Miner
 
 To Do:
 ------
-- [ ] Finish SHA block 
+- [X] Finish SHA block 
 - [ ] Finish Mem Manager
 - [ ] Figure out FPGA
 - [ ] Presentation
