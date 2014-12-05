@@ -8,7 +8,7 @@
 
 module sha_block 
   #(
-    parameter NCORE = 1
+    parameter NCORE = 2
     )
    (
     input wire 	       clk,
@@ -19,10 +19,10 @@ module sha_block
     output wire        flag,
     output wire [31:0] goldenNonce
     );
-
+   
    genvar 	       i;
    
-   wire [31:0] 	       nonceFactor;
+   localparam [31:0] 	       nonceFactor = (32'd4294967295 / NCORE) + 1;
    
    reg [33*NCORE-1:0]  outputManagerIn;
    reg [NCORE-1:0]     outputManagerFlag;
@@ -32,22 +32,21 @@ module sha_block
    wire 	       clearCounter;
    
    assign clearCounter = ~loadState;
-   assign nonceFactor = 32'd4294967295 / NCORE;
    assign flag = (outputManagerFlag == 0) ? 1'b0 : 1'b1;
    
    cycleCounter cycleCounter(
-			   .clk(clk),
-			   .clearCounter(clearCounter),
-			   .solveEn(solveEn),
-			   .cycle(cycle)
-			   );
-
+			     .clk(clk),
+			     .clearCounter(clearCounter),
+			     .solveEn(solveEn),
+			     .cycle(cycle)
+			     );
+   
    nonceCounter #(NCORE) nonceCounter (
-				      .clk(clk),
-				      .clearCounter(clearCounter),
-				      .cycle(cycle),
-				      .nonce(nonce)
-				      );
+				       .clk(clk),
+				       .clearCounter(clearCounter),
+				       .cycle(cycle),
+				       .nonce(nonce)
+				       );
    
    sha_output_manager #(NCORE) outputManager (
 					      .clk(clk),
@@ -60,14 +59,15 @@ module sha_block
    generate
       for (i = 0; i < NCORE; i++)
 	begin
-	   sha_core core (
-			  .clk(clk),
-			  .midState(midState),
-			  .headData(headData),
-			  .cycle(cycle),
-			  .nonce(nonce+(i*nonceFactor)),
-			  .coreOutput(outputManagerIn[33*(i+1)-1:33*i])
-			  );
+	   sha_core core(
+			 .clk(clk),
+			 .midState(midState),
+			 .headData(headData),
+			 .cycle(cycle),
+			 .nonce(nonce),
+			 .nonceFactor(i*nonceFactor),
+			 .coreOutput(outputManagerIn[33*(i+1)-1:33*i])
+			 );
 	end // for (i = 0; i < NCORE; i++)
    endgenerate
 
@@ -75,6 +75,6 @@ module sha_block
    
 endmodule // sha_block
 
-   
-				    
-   
+
+
+

@@ -19,11 +19,12 @@ module nonceCounter
 
    wire [31:0] 	       roll;
    reg 		       enable;
-
+   reg [31:0] 	       out;
+	       
    assign roll = 32'd4294967295 / NCORE;
-   assign enable = (cycle == 0) ? 1'b1 : 0;
-   
-   counter #(32) cnt(.clk(clk),.n_rst(clearCounter),.enable(enable),.rollover_val(roll),.count_out(nonce));
+   assign enable = (cycle == 32'd63) ? 1'b1 : 0;
+   assign nonce = out;
+   counter #(32) cnt(.clk(clk),.n_rst(clearCounter),.enable(enable),.rollover_val(roll),.count_out(out));
    
    
 endmodule // nonceCounter

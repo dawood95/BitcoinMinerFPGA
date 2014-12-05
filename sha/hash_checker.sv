@@ -15,15 +15,13 @@ module hash_checker (
 		     );
    
    wire 				flag;
-   wire 				enable;
    reg [31:0] 				nonce_stored;
    
    assign flag = (data_in == 32'b0) ? 1'b1 : 1'b0;
    assign flag_plus_nonce = {flag, nonce_stored};
-   assign enable = (count == 6'd1)  ? 1'b1 : 1'b0;
   
    always_ff @ (posedge clk) begin
-      if(enable) 
+      if(count == 1'b1) 
 	nonce_stored <= nonce;
       else 
 	nonce_stored <= nonce_stored;

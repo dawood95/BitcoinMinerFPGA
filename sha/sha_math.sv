@@ -33,14 +33,14 @@ module sha_math(
 		'{32'h5b9cca4f, 32'h682e6ff3}, '{32'h748f82ee, 32'h78a5636f}, '{32'h84c87814, 32'h8cc70208}, '{32'h90befffa, 32'ha4506ceb} 
 		};
    // K has been shifter so that the actual K[63] is our K[0].
-   wire [31:0] 			    a;
-   wire [31:0] 			    b;
-   wire [31:0] 			    c;
-   wire [31:0] 			    d;
-   wire [31:0] 			    e;
-   wire [31:0] 			    f;
-   wire [31:0] 			    g;
-   wire [31:0] 			    h;
+   logic [31:0] 		    a;
+   logic [31:0] 		    b;
+   logic [31:0] 		    c;
+   logic [31:0] 		    d;
+   logic [31:0] 		    e;
+   logic [31:0] 		    f;
+   logic [31:0] 		    g;
+   logic [31:0] 		    h;
    
    reg [31:0] 			    a_s0;
    reg [31:0] 			    e_s1;
