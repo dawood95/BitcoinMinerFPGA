@@ -8,7 +8,7 @@ module timer_proj
   output wire remaining_shifts_done
 );
 
-  reg [5:0] count_out;
+  reg [4:0] count_out;
   
   assign midstate_shifts_done = (count_out == 5'b01000) ? 1 : 0;
   assign remaining_shifts_done = (count_out == 5'b11000) ? 1 : 0;
