@@ -19,7 +19,7 @@ module mem_manager (
 	
 	// data blocks
 	logic mine_block = 28'h8000008; 
-	logic nonce_block = 28h8000068; // 96 bytes later
+	logic nonce_block = 28'h8000068; // 96 bytes later
 	
 	// control data reading
 	logic rdwr_toggle;
@@ -58,6 +58,7 @@ module mem_manager (
 						q_next = IDLE; // atom does not have new data 
 				end else 
 					q_next = READ_REG; // reg read not complete yet
+			end
 			READ_BLOCK_SETUP: begin
 				q_next = READ_BLOCK;
 			end
