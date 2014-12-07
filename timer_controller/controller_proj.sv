@@ -23,7 +23,7 @@ module controller_proj
   
   //State Register
   always_ff @ (posedge clk, negedge n_rst) begin
-    if (n_rst == 0) cur_state <= idle;
+    if (n_rst == 0) cur_state <= IDLE;
     else cur_state <= next_state;
   end
   
