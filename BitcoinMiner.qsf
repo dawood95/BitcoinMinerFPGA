@@ -529,6 +529,7 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 # set_global_assignment -name SYSTEMVERILOG_FILE mem_manager.sv
 
 
+set_global_assignment -name SYSTEMVERILOG_FILE sha_output/design_core.sv
 set_global_assignment -name VERILOG_FILE ip/Master_Template/write_master.v
 set_global_assignment -name VERILOG_FILE ip/Master_Template/latency_aware_read_master.v
 set_global_assignment -name VERILOG_FILE ip/Master_Template/custom_master.v
@@ -537,7 +538,7 @@ set_global_assignment -name VERILOG_FILE ip/Master_Template/burst_read_master.v
 set_global_assignment -name SYSTEMVERILOG_FILE timer_controller/timer_proj.sv
 set_global_assignment -name SYSTEMVERILOG_FILE timer_controller/controller_proj.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha_output/stp_sr.sv
-set_global_assignment -name QSYS_FILE amm_master_qsys_with_pcie.qsys
+# set_global_assignment -name QSYS_FILE amm_master_qsys_with_pcie.qsys
 set_global_assignment -name SYSTEMVERILOG_FILE sha/sha_output_manager.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha/sha_math.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha/sha_datashift.sv
@@ -561,4 +562,5 @@ set_global_assignment -name SDC_FILE BitcoinMiner.sdc
 set_global_assignment -name QIP_FILE amm_master_qsys_with_pcie/synthesis/amm_master_qsys_with_pcie.qip
 set_global_assignment -name VERILOG_FILE SEG_HEX.v
 set_global_assignment -name SYSTEMVERILOG_FILE BitcoinMiner.sv
+
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
