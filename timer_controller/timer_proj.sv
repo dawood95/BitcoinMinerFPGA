@@ -2,7 +2,7 @@ module timer_proj
 (
   input wire clk,
   //input wire n_rst,
-  //input wire start_found,
+  input wire start_found,
   input wire [2:0] controller_state,
   output wire midstate_shifts_done,
   output wire remaining_shifts_done
@@ -15,7 +15,7 @@ module timer_proj
   
   counter #(5) CTR1 (
     .clk(clk),
-    .n_rst(~(controller_state == 3'b000)),
+    .n_rst(~(controller_state == 3'b000 || start_found)),
     .enable((controller_state == 3'b001) || (controller_state == 3'b010)), 
     .rollover_val(5'b11111),
     .count_out(count_out)
