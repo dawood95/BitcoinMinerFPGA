@@ -15,11 +15,10 @@ module timer_proj
   
   counter #(5) CTR1 (
     .clk(clk),
-    .n_rst(1'b1),
+    .n_rst(~(controller_state == 3'b000)),
     .enable((controller_state == 3'b001) || (controller_state == 3'b010)), 
-    .clear(controller_state == 3'b000),
     .rollover_val(5'b11111),
-    .count_out(count_out),
+    .count_out(count_out)
   );
     
 endmodule
