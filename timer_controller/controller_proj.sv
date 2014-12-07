@@ -1,11 +1,13 @@
 module controller_proj
 (
   input wire clk,
+  input wire n_rst,
   input wire start_found,
   input wire midstate_shifts_done,
   input wire remaining_shifts_done,
   input wire sol_claim,
   input wire [1:0] sol_response,
+  output wire idleState, midState, headState, solveState,
   output wire [2:0] state
 );
 
@@ -20,8 +22,9 @@ module controller_proj
   state_type cur_state, next_state;
   
   //State Register
-  always @ (posedge clk) begin
-    cur_state <= next_state;
+  always_ff @ (posedge clk, negedge n_rst) begin
+    if (n_rst == 0) cur_state <= idle;
+    else cur_state <= next_state;
   end
   
   //Next State Logic
@@ -35,25 +38,31 @@ module controller_proj
           next_state = IDLE;
       end
       LOAD_MIDSTATE: begin
-        if(midstate_shifts_done == 1'b0)
+        if(start_found == 1'b1 || midstate_shifts_done == 1'b0)
           next_state = LOAD_MIDSTATE;
         else
           next_state = LOAD_REMAINING_HEADER;
       end
       LOAD_REMAINING_HEADER: begin
-        if(remaining_shifts_done == 1'b0)
+	if(start_found == 1'b1)
+          next_state = LOAD_MIDSTATE;
+        else if(remaining_shifts_done == 1'b0)
           next_state = LOAD_REMAINING_HEADER;
         else
           next_state = SOLVE;
       end
       SOLVE: begin
-        if (sol_claim == 1'b1)
+	if(start_found == 1'b1)
+          next_state = LOAD_MIDSTATE;
+        else if (sol_claim == 1'b1)
           next_state = HALT;
         else 
           next_state = SOLVE;
       end
       HALT: begin
-        if (sol_response == 2'b00)
+        if(start_found == 1'b1)
+          next_state = LOAD_MIDSTATE;
+        else if (sol_response == 2'b00)
           next_state = HALT;
         else if (sol_response == 2'b01)
           next_state = SOLVE;
@@ -65,5 +74,9 @@ module controller_proj
   
   //Output
   assign state = cur_state;
+  assign midState = (state == 3'b001) 	? 1 :  0;
+  assign headState = (state == 3'b010) 	? 1 :  0;
+  assign idleState = (state == 3'b000) 	? 1 :  0;
+  assign solveState = (state == 3'b011) ? 1 :  0;
 
 endmodule
