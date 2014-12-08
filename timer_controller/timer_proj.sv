@@ -10,8 +10,8 @@ module timer_proj
 
   reg [4:0] count_out;
   
-  assign midstate_shifts_done = (count_out == 5'b01000) ? 1 : 0;
-  assign remaining_shifts_done = (count_out == 5'b11000) ? 1 : 0;
+  assign midstate_shifts_done = (count_out == 5'b00111) ? 1 : 0;
+  assign remaining_shifts_done = (count_out == 5'b10111) ? 1 : 0;
   
   counter #(5) CTR1 (
     .clk(clk),
