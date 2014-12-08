@@ -58,7 +58,7 @@ module sha_block
    
    generate
       for (i = 0; i < NCORE; i++)
-	begin
+	begin : cre
 	   sha_core core(
 			 .clk(clk),
 			 .midState(midState),

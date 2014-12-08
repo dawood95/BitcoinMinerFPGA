@@ -31,7 +31,7 @@ module stp_sr
   end
   
   generate
-    for (i = 1; i < NUM_WORDS; i+= 1) begin
+    for (i = 1; i < NUM_WORDS; i+= 1) begin : stpsr
       always @ (posedge clk, negedge n_rst) begin
         if (n_rst == 0) begin
           parallel_out[i] <= 32'b0;

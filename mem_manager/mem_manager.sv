@@ -4,11 +4,11 @@ module mem_manager (
 	output logic rdwr_cntl, // read write control 
 	output logic n_action, // not needed 
 	output logic add_data_sel, // not needed 
-	output logic [27:0] mm_address, // address to read or write to
+	output logic [27:0] mm_address, // mm_address to read or write to
 	output logic counter, // for testing 
 	
 	// from master ram controller 
-	input logic read_user_data_availble, 
+	input logic read_user_data_available, 
 	input logic [31:0] read_user_buffer_output_data,
 	input logic write_control_done 
 	);
@@ -19,7 +19,7 @@ module mem_manager (
 	
 	// data blocks
 	logic mine_block = 28'h8000008; 
-	logic nonce_block = 28h8000068; // 96 bytes later
+	logic nonce_block = 28'h8000068; // 96 bytes later
 	
 	// control data reading
 	logic rdwr_toggle;
@@ -58,6 +58,7 @@ module mem_manager (
 						q_next = IDLE; // atom does not have new data 
 				end else 
 					q_next = READ_REG; // reg read not complete yet
+			end
 			READ_BLOCK_SETUP: begin
 				q_next = READ_BLOCK;
 			end
@@ -88,24 +89,24 @@ module mem_manager (
 		case(q)
 			IDLE: begin
 				// prepare reg read 
-				address = atom_reg;
-				rdwr_cntl = 1'b0;
+				mm_address = atom_reg;
+				rdwr_toggle = 1'b0;
 			end
 			READ_REG: begin
 				// read reg 
 			end
 			READ_BLOCK_SETUP: begin
 				// prepare block read 
-				address = mine_block;
-				rdwr_cntl = 1'b0;
+				mm_address = mine_block;
+				rdwr_toggle = 1'b0;
 			end
 			READ_BLOCK: begin
 				// read block 
 			end
 			WRITE_REG: begin
 				// prepare write 
-				address = hdwr_reg;
-				rdwr_cntl = 1'b1;
+				mm_address = hdwr_reg;
+				rdwr_toggle = 1'b1;
 			end
 		endcase
 	end 
@@ -113,7 +114,7 @@ module mem_manager (
 	assign rdwr_cntl = rdwr_toggle;
 	assign counter = clock_counter; // for testing
 	
-	assign add_data_sel = 1'b0; // get data, not address, not needed 
+	assign add_data_sel = 1'b0; // get data, not mm_address, not needed 
 	assign n_action = 1'b0; // switch toggle, not needed
 	
 endmodule

@@ -1,4 +1,4 @@
-module master_example ( 
+module BitcoinMiner ( 
 				CLOCK_50 , 
 				SW , 
 				KEY, 
@@ -179,13 +179,16 @@ amm_master_qsys_with_pcie amm_master_inst  (
 	.pcie_ip_rx_in_rx_datain_0       (PCIE_RX_P),                          // pcie_ip_rx_in.rx_datain_0
 	.pcie_ip_tx_out_tx_dataout_0     (PCIE_TX_P)                           // pcie_ip_tx_out.tx_dataout_0
 );
-  
+ 
+ 
+// TOP LEVEL
+
 mem_manager mem_manager_inst (
 	.clk(soc_clk),
 	.reset(KEY[1]),
 	.rdwr_cntl(rdwr_cntl),
 	.n_action(n_action),
-	.mm_address(mm_address)),
+	.mm_address(mm_address),
 	.add_data_sel(add_data_sel),
 	.read_user_data_available(usr_rd_buffer_nonempty),
 	.read_user_buffer_output_data(usr_rd_buffer_data),

@@ -27,13 +27,15 @@ module sha_output_manager
    end
    
    generate
-    for (i = 0; i < NUM_CORES; i++) begin
+    for (i = 0; i < NUM_CORES; i++) 
+	 begin : flg
        assign flag[i] = rf[33*(i + 1) - 1];
     end
    endgenerate
    
    generate
-    for (i = 0; i < 32; i++) begin
+    for (i = 0; i < 32; i++) 
+		begin : nnce
        always_comb begin
           golden_nonce[i] = 1'b0;
           for (j[i] = 0; j[i] < NUM_CORES; j[i]++) begin
