@@ -10,7 +10,14 @@ module mem_manager (
 	// from master ram controller 
 	input logic read_user_data_available, 
 	input logic [31:0] read_user_buffer_output_data,
-	input logic write_control_done 
+	input logic write_control_done,
+	
+	// for design core
+	output logic start_found,
+	output logic [1:0] sol_response,
+	output logic [31:0] out_data,
+	input logic sol_claim,
+	input logic [31:0] in_data
 	);
 	
 	// flags
@@ -22,7 +29,7 @@ module mem_manager (
 	logic nonce_block = 28'h8000068; // 96 bytes later
 	
 	// control data reading
-	logic rdwr_toggle;
+	logic rdwr_toggle = 1'b0;
 	logic [3:0] clock_counter;
 	
 	typedef enum {IDLE, READ_REG, READ_BLOCK_SETUP, READ_BLOCK, WRITE_REG} state;
@@ -33,8 +40,8 @@ module mem_manager (
 		// check for possible solution in here (as in nonce_ready)??
 		if (!reset) begin
 			q <= IDLE;
-			clock_counter = 0;
-			rdwr_toggle = 0;
+			clock_counter <= 0;
+			// rdwr_toggle <= 0;
 		end else begin
 			q <= q_next;
 			// clock_counter <= clock_counter + 4'd1;
@@ -86,6 +93,8 @@ module mem_manager (
 	
 	// output logic 
 	always_comb begin
+		mm_address = 0;
+		rdwr_toggle = 0;
 		case(q)
 			IDLE: begin
 				// prepare reg read 
