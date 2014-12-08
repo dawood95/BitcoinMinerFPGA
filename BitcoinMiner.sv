@@ -192,9 +192,23 @@ mem_manager mem_manager_inst (
 	.add_data_sel(add_data_sel),
 	.read_user_data_available(usr_rd_buffer_nonempty),
 	.read_user_buffer_output_data(usr_rd_buffer_data),
-	.write_control_done(ctl_wr_done)
+	.write_control_done(ctl_wr_done),
+	.start_found(start_found),
+	.sol_response(sol_response),
+	.in_data(in_data),
+	.sol_claim(sol_claim),
+	.out_data(out_data)
 );
-	
+
+design_core design_core_inst (
+  .clk(soc_clk), 
+  .n_rst(KEY[1]), 
+  .start_found(start_found),
+  .sol_response(sol_response),
+  .in_data(in_data),
+  .sol_claim(sol_claim),
+  .out_data(out_data)
+);
 
 user_logic user_logic_inst (
 	.clk(soc_clk),
@@ -202,13 +216,7 @@ user_logic user_logic_inst (
 	.rdwr_cntl(rdwr_cntl),
 	.n_action(n_action),
 	.add_data_sel(add_data_sel),
-	.read_address(read_address),
-	/*
-	.rdwr_cntl(SW[17]),
-	.n_action(KEY[1]),
-	.add_data_sel(SW[16]),
-	.read_address(SW[7:0]),
-	*/
+	.mm_address(mm_address),
 	.indicator(indicator),
 	.display_data(display_data),
 	.write_control_fixed_location(ctl_wr_fixed_location),

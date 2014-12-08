@@ -13,7 +13,7 @@ module user_logic #(
 	output logic indicator,
 	input logic add_data_sel,
 	input logic [3:0] counter,
-	input logic [ADDRESSWIDTH-1:0] read_address,
+	input logic [ADDRESSWIDTH-1:0] mm_address,
 	output logic[DATAWIDTH-1:0] display_data,
 	
 	// Control interface to write master
@@ -92,13 +92,15 @@ always_comb begin
 		IDLE: begin //writes take priority
 			if(rdwr_cntl & !n_action) begin
 				nextState = WRITE;
-				nextAddress = address + BYTEENABLEWIDTH;
+				nextAddress = mm_address;
+				// nextAddress = address + BYTEENABLEWIDTH;
 				nextData = data_to_write; // !! this is where write data goes                                                       
 				// nextData = read_data;
 				// nextData = wr_data + 4;
 			end else if (!rdwr_cntl & !n_action) begin 
 				nextState = READ_REQ;
-				nextAddress =  address - BYTEENABLEWIDTH;
+				// nextAddress =  address - BYTEENABLEWIDTH;
+				nextAddress = mm_address;
 			end
 		end
 		WRITE: begin
@@ -142,7 +144,7 @@ always_comb begin
 	read_control_go = 1'b0;
 	read_control_read_base = address;
 	read_user_read_buffer = 1'b0;
-	rd_data = 32'hbad1bad1;
+	rd_data = 32'hbad1bad1; // not used 
 	case(state)
 		IDLE: begin
 			write_control_go = 1'b0;
@@ -152,14 +154,14 @@ always_comb begin
 			if (!write_user_buffer_full) begin
 			write_user_write_buffer = 1'b1;
 			write_control_go = 1'b1;		
-			write_control_write_base = 28'h8000004;
+			write_control_write_base = address;
 			write_user_buffer_data = wr_data;
 			// display_data = wr_data;
 			end 
 		end
 		READ_REQ: begin
 				read_control_go = 1'b1;
-				read_control_read_base = 28'h8000000;
+				read_control_read_base = address;
 				
 				end
 		READ_ACK: begin
