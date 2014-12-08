@@ -13,15 +13,11 @@ module stp_sr_8 (
 );
   
   wire [31:0] p_out [7:0];
+  genvar i;
   
-  assign parallel_out [31:0] = p_out[0];
-  assign parallel_out [63:32] = p_out[1];
-  assign parallel_out [95:64] = p_out[2];
-  assign parallel_out [127:96] = p_out[3];
-  assign parallel_out [159:128] = p_out[4];
-  assign parallel_out [191:160] = p_out[5];
-  assign parallel_out [223:192] = p_out[6];
-  assign parallel_out [255:224] = p_out[7];
+  for (i = 0; i < 8; i++) begin
+    assign parallel_out [32*(i+1)-1: 32*i] = p_out[i];
+  end
   
   stp_sr #(8) SR (
     .clk(clk),
