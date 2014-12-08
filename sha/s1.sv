@@ -1,16 +1,15 @@
 // $Id: $
-// File name:   S1.v
-// Created:     11/6/2014
+// File name:   Sig1.sv
+// Created:     11/29/2014
 // Author:      Sheik Dawood
 // Lab Section: 337-03
 // Version:     1.0  Initial Design Entry
-// Description: S1
+// Description: Sigma function 1
 
-
-module S1(
-	 input wire [31:0] i,
-	 output wire [31:0] o
+module s1(
+	  input wire [31:0]  i,
+	  output wire [31:0] o
 	 );
-   assign o = {i[5:0],i[31:6]}^{i[10:0],i[31:11]}^{i[24:0],i[31:25]};
+   assign o = {i[16:0],i[31:17]}^{i[18:0],i[31:19]}^{10'b0,i[31:10]};
 
 endmodule // m
