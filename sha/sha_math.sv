@@ -84,10 +84,10 @@ module sha_math(
    assign math_output[223:192] = e;
    assign math_output[255:224] = f;
    
-   S0 s0_1(.i(a),.o(a_s0));
-   S0 s0_2(.i(adder_out3),.o(a_s01));
-   S1 s1_1(.i(e),.o(e_s1));
-   S1 s1_2(.i(adder_out7),.o(e_s11));
+   ss0 s0_1(.i(a),.o(a_s0));
+   ss0 s0_2(.i(adder_out3),.o(a_s01));
+   ss1 s1_1(.i(e),.o(e_s1));
+   ss1 s1_2(.i(adder_out7),.o(e_s11));
    Maj maj_1(.a(a),.b(b),.c(c),.o(maj1));
    Maj maj_2(.a(adder_out3),.b(a),.c(b),.o(maj2));
    Ch ch_1(.a(e),.b(f),.c(g),.o(ch1));
