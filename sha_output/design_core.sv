@@ -46,7 +46,7 @@ module design_core (
     .remaining_shifts_done(remaining_shifts_done)
   );
   
-  stp_sr #(8) MID_SR (
+  stp_sr_8 MID_SR (
     .clk(clk),
     .n_rst(~(idleState || start_found)), //reset when idle
     .shift_enable(midState),
@@ -54,7 +54,7 @@ module design_core (
     .parallel_out(midData)
   );
   
-  stp_sr #(16) HEAD_SR (
+  stp_sr_16 HEAD_SR (
     .clk(clk),
     .n_rst(~(idleState || start_found)), //reset when idle
     .shift_enable(headState),
