@@ -50,6 +50,7 @@ module sha_block
    
    sha_output_manager #(NCORE) outputManager (
 					      .clk(clk),
+					      .n_rst(~loadState),
 					      .enable(solveEn),
 					      .data_in(outputManagerIn),
 					      .flag(outputManagerFlag),
@@ -61,6 +62,7 @@ module sha_block
 	begin : cre
 	   sha_core core(
 			 .clk(clk),
+                         .loadState(loadState),
 			 .midState(midState),
 			 .headData(headData),
 			 .cycle(cycle),

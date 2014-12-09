@@ -8,6 +8,7 @@
 
 module sha_core(
 		input wire 	   clk,
+                input wire         loadState,
 		input wire [255:0] midState,
 		input wire [511:0] headData,
 		input wire [5:0]   cycle,
@@ -40,7 +41,8 @@ module sha_core(
    //SHA Checker
 
    hash_checker hashchk(
-			.clk(clk), 
+			.clk(clk),
+                        .n_rst(~loadState), 
 			.count(cycle),
 			.nonce(nonceVal),
 			.data_in(shaOutput[255:224]),

@@ -8,7 +8,7 @@
 
 module design_core (
   input wire clk, n_rst, start_found,
-  input wire [1:0] sol_response,
+  input wire sol_response,
   input wire [31:0] in_data,
   output wire sol_claim,
   output wire [31:0] out_data
@@ -65,7 +65,7 @@ module design_core (
     .midState(midData),
     .headData(headData),
     .solveEn(solveState),
-    .loadState(midState),
+    .loadState(midState || headState),
     .flag(sol_claim),
     .goldenNonce(out_data)
   );
