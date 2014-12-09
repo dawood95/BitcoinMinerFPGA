@@ -2,29 +2,20 @@
 
 import sys
 import struct
+import binascii
 
-def mask(n):
-   if n >= 0:
-      return 2**n - 1
-   else:
-      return 0
 
-def rr(n, rotations=1, width=32):
-   rotations %= width
-   n &= mask(width)
-   return (n >> rotations) | ((n << (width - rotations)) & mask(width))
-
-def rs(n, shift):
-   return n>>shift & 0xffffffff
 
 def process(ver,prev_block,mrkl_root,time,bits,nonce = 0):
+
+   rrot = lambda x, n: (x >> n) | (x << (32 - n));
 
    header = (struct.pack("<L", int(ver)) + prev_block.decode('hex')[::-1] + mrkl_root.decode('hex')[::-1] + struct.pack("<LLL", int(time), int(bits), int(nonce)) + struct.pack(">LLLLLLLLLLLL",int(2147483648),int(0),int(0),int(0),int(0),int(0),int(0),int(0),int(0),int(0),int(0),int(640)));
    
    hexh = header.encode('hex')
-   print hexh;
-   for i in range(0,32):
-      print "Chunk %d : 32'h%s;" % (i,hexh[i*8:(i+1)*8]);
+   #print hexh;
+   #for i in range(0,32):
+   #   print "Chunk %d : 32'h%s;" % (i,hexh[i*8:(i+1)*8]);
       
    k = [
       0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
@@ -46,19 +37,20 @@ def process(ver,prev_block,mrkl_root,time,bits,nonce = 0):
    h6 = 0x1f83d9ab;
    h7 = 0x5be0cd19;
     
-   W = [];
+   w = [];
    midState = [];
    remainingHeader = [];
    
    for i in range(16,32):
       remainingHeader.append(int(hexh[i*8:(i+1)*8],16));
    for i in range(0,16):
-      W.append(int(hexh[i*8:(i+1)*8],16));
-      
-   for i in range(16,64):
-      s0 = rr(W[i-15], 7) ^ rr(W[i-15], 18) ^ rs(W[i-15], 3);
-      s1 = rr(W[i-2], 17) ^ rr(W[i-2], 19) ^ rs(W[i-2], 10);
-      W.append(W[i-16] + s0 + W[i-7] + s1);
+      w.append(int(hexh[i*8:(i+1)*8],16));
+   
+   #print w;
+   for i in range(16, 64):
+      s0 = rrot(w[i - 15], 7) ^ rrot(w[i - 15], 18) ^ (w[i - 15] >> 3)
+      s1 = rrot(w[i - 2], 17) ^ rrot(w[i - 2], 19) ^ (w[i - 2] >> 10)
+      w.append((w[i - 16] + s0 + w[i - 7] + s1) & 0xffffffff)
 
    a = h0
    b = h1
@@ -69,30 +61,31 @@ def process(ver,prev_block,mrkl_root,time,bits,nonce = 0):
    g = h6
    h = h7
      
-   for i in range(0,64):
-      S1 = rr(e,6) ^ rr(e,11) ^ rr(e,25);
-      ch = (e & f) ^ ((~e) & g);
-      temp1 = h + S1 + ch + k[i] + W[i]
-      S0 = rr(a,2) ^ rr(a,13) ^ rr(a,22);
-      maj = (a & b) ^ (a & c) ^ (b & c);
-      temp2 = S0 + maj
+   for i in range(64):
+      s0 = rrot(a, 2) ^ rrot(a, 13) ^ rrot(a, 22)
+      maj = (a & b) ^ (a & c) ^ (b & c)
+      t2 = s0 + maj
+      s1 = rrot(e, 6) ^ rrot(e, 11) ^ rrot(e, 25)
+      ch = (e & f) ^ ((~ e) & g)
+      t1 = h + s1 + ch + k[i] + w[i]
+      
       h = g
       g = f
       f = e
-      e = d + temp1
+      e = (d + t1) & 0xffffffff
       d = c
       c = b
       b = a
-      a = temp1 + temp2
+      a = (t1 + t2) & 0xffffffff
       
-   h0 = h0 + a
-   h1 = h1 + b
-   h2 = h2 + c
-   h3 = h3 + d
-   h4 = h4 + e
-   h5 = h5 + f
-   h6 = h6 + g
-   h7 = h7 + h   
+   h0 = (h0 + a)& 0xffffffff
+   h1 = (h1 + b)& 0xffffffff
+   h2 = (h2 + c)& 0xffffffff
+   h3 = (h3 + d)& 0xffffffff
+   h4 = (h4 + e)& 0xffffffff
+   h5 = (h5 + f)& 0xffffffff
+   h6 = (h6 + g)& 0xffffffff
+   h7 = (h7 + h)& 0xffffffff
    
    midState.append(h0);
    midState.append(h1);
@@ -103,11 +96,9 @@ def process(ver,prev_block,mrkl_root,time,bits,nonce = 0):
    midState.append(h6);
    midState.append(h7);
 
-   print "\nMid State: \n \n"
-   for i in range(0,8):
-      print struct.pack('L',int(midState[i]));
-   print "\nRemaining Header: \n \n"
-   print remainingHeader
+   return (midState, remainingHeader);
+   #print midState;
+   #print remainingHeader
 
-process(2,"00000000000000000460014ddf050359a44c5e7ca1ba33c2ec509abce58a1a80","0e7e4505929fc0678ae2f6cd7a3441484f6935fa2ca36d584c5048ae2436b81d",1418002670,404454260);
+print process(2,"00000000000000001af51dcc599ca5c8ca80f823a7ab2400e301e7bfc129e940","c400ab7d5b0b274bcc8275945f82a3f807cf5d271350fe4b777fc5a4feea6ec1",1417549430,404441185);
 
