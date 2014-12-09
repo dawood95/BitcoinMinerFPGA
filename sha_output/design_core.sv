@@ -18,8 +18,6 @@ module design_core (
   wire midstate_shifts_done, remaining_shifts_done;
   wire [2:0] state;
   wire idleState, midState, headState, solveState;
-  wire [31:0] midData_source [7:0];
-  wire [31:0] headData_source [15:0];
   wire [255:0] midData;
   wire [511:0] headData;
   

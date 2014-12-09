@@ -13,24 +13,14 @@ module stp_sr_16 (
 );
   
   wire [31:0] p_out [15:0];
+  genvar i;
   
-  assign parallel_out [31:0] = p_out[0];
-  assign parallel_out [63:32] = p_out[1];
-  assign parallel_out [95:64] = p_out[2];
-  assign parallel_out [127:96] = p_out[3];
-  assign parallel_out [159:128] = p_out[4];
-  assign parallel_out [191:160] = p_out[5];
-  assign parallel_out [223:192] = p_out[6];
-  assign parallel_out [255:224] = p_out[7];
-  assign parallel_out [287:256] = p_out[8];
-  assign parallel_out [319:286] = p_out[9];
-  assign parallel_out [351:320] = p_out[10];
-  assign parallel_out [383:352] = p_out[11];
-  assign parallel_out [415:384] = p_out[12];
-  assign parallel_out [447:416] = p_out[13];
-  assign parallel_out [479:448] = p_out[14];
-  assign parallel_out [511:480] = p_out[15];
-  
+	generate
+		for (i = 0; i < 16; i++) begin : pout16
+			assign parallel_out [32*(i+1)-1: 32*i] = p_out[i];
+		end
+	endgenerate
+	
   stp_sr #(16) SR (
     .clk(clk),
     .n_rst(n_rst),
