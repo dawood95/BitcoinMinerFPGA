@@ -48,24 +48,26 @@ logic start_found, next_start_found, display_start_found;
 logic mine_block = 28'h8000008; 
 logic nonce_block = 28'h8000068; // 96 bytes later
 
-logic [ADDRESSWIDTH-1:0] address, nextAddress;
+logic [ADDRESSWIDTH-1:0] r_address, r_nextAddress, w_address, w_nextAddress;
 logic [DATAWIDTH-1:0] rd_data, wr_data, nextData; 
 logic [DATAWIDTH-1:0] nextRead_data, read_data;
-typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA, BLOCK} state_t;
+typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA, BLOCK_IDLE, BLOCK_READ_REQ, BLOCK_READ_WAIT, BLOCK_READ_ACK, BLOCK_READ_DATA, BLOCK_WRITE, BLOCK_WRITE_WAIT} state_t;
 state_t state, nextState;
 
 // assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
-assign display_data[31:4] = address;
+assign display_data[31:24] = total_reads; // r_address[27:20];
+assign display_data[23:16] = read_data[31:24];
+assign display_data[15:4] = r_address[11:0];
 assign display_start_found = start_found;
 assign display_data[3:0] = {3'b0,display_start_found};
 
 // read counter
-logic [4:0] total_reads;
+logic [7:0] total_reads;
 logic count_read;
-counter #(5) cntr(.clk(clk),.n_rst(!reset),.enable(count_read),.rollover_val(6'd23),.count_out(total_reads));
+counter #(8) cntr(.clk(clk),.n_rst(!reset),.enable(count_read),.rollover_val(8'd24),.count_out(total_reads));
 
 always_comb begin 
-	if ((address > 28'h00000000) & !rdwr_cntl) 
+	if ((r_address > 28'h00000000) & !rdwr_cntl) 
 		indicator = 1;
 	else 
 		indicator = 0;
@@ -73,14 +75,16 @@ end
 
 always_ff @ (posedge clk) begin
 	if(!reset) begin
-		address <= 0;
+		r_address <= 0;
+		w_address <= 0;
 		state <= IDLE ;
 		wr_data <= 0;
 		read_data <= 32'hFEEDFEED; 
 		start_found <= 0;
 	end else begin
 		state <= nextState;
-		address <= nextAddress;
+		r_address <= r_nextAddress;
+		w_address <= w_nextAddress;
 		wr_data <= nextData;
 		read_data <= nextRead_data;
 		start_found <= next_start_found;
@@ -91,7 +95,8 @@ end
 // Next State Logic 
 always_comb begin
 	nextState = state;
-	nextAddress = address;
+	r_nextAddress = r_address;
+	w_nextAddress = w_address;
 	nextData = wr_data;
 	nextRead_data = read_data;
 	next_start_found = start_found;
@@ -109,12 +114,13 @@ always_comb begin
 			*/
 			
 			if (read_data == 32'hAAAA0000) begin 
-				nextState = BLOCK;
-				nextAddress = 28'h8000004;
+				nextState = BLOCK_IDLE;
+				r_nextAddress = 28'h8000004;
+				w_nextAddress = 28'h8000090;
 				next_start_found = 1'b1;
 			end else begin
 				nextState = READ_REQ;
-				nextAddress = 28'h8000000;
+				r_nextAddress = 28'h8000000;
 				next_start_found = 1'b0;
 			end
 		end
@@ -122,11 +128,13 @@ always_comb begin
 			nextState = WRITE_WAIT;
 		end
 		WRITE_WAIT: begin
+			/*
+			nextAddress = nextAddress + 1; // testing 
 			if (write_control_done && start_found == 1'b1) begin
 				nextState = BLOCK;
-			end else begin
-				nextState = IDLE;
-			end
+				nextAddress = nextAddress + 4; // testing
+			end */
+			nextState = IDLE;
 		end
 		READ_REQ: begin
 			nextState = READ_WAIT;
@@ -141,22 +149,47 @@ always_comb begin
 			nextRead_data = read_user_buffer_output_data;
 		end
 		READ_DATA: begin
+			/*
 			if (start_found == 1'b1) begin
 				nextState = WRITE;
 				nextData = read_data;
 				nextAddress = nonce_block;
-			end else begin 
-				nextState = IDLE;
-			end 
+			end
+			*/
+			nextState = IDLE; 
 		end
-		BLOCK: begin
-			// state should be hit 24 times, before the read
+		BLOCK_IDLE: begin
+			// state should be hit 24 times, each before the read
 			if (total_reads == 5'd23) begin
 				nextState = IDLE;
 			end else begin
-				nextState = READ_REQ;
-				nextAddress = nextAddress + 4;
+				nextState = BLOCK_READ_REQ;
+				r_nextAddress = r_nextAddress + 4;
+				w_nextAddress = r_nextAddress + 4;
 			end
+		end
+		BLOCK_READ_REQ: begin
+			nextState = BLOCK_READ_WAIT;
+		end
+		BLOCK_READ_WAIT: begin
+			if ( read_control_done ) begin
+				nextState = BLOCK_READ_ACK;
+			end
+		end
+		BLOCK_READ_ACK: begin
+			nextState = BLOCK_READ_DATA;
+			nextRead_data = read_user_buffer_output_data;
+		end
+		BLOCK_READ_DATA: begin
+			nextState = BLOCK_WRITE;
+			w_nextAddress = w_nextAddress + 4;
+			nextData = read_data;
+		end
+		BLOCK_WRITE: begin
+			nextState = BLOCK_WRITE_WAIT;
+		end
+		BLOCK_WRITE_WAIT: begin
+			nextState = BLOCK_IDLE;
 		end
 		default: begin
 		end
@@ -167,10 +200,10 @@ end
 always_comb begin
 	write_control_go = 1'b0;
 	write_user_write_buffer = 1'b0;
-	write_control_write_base = address;
+	write_control_write_base = w_address;
 	write_user_buffer_data = 32'h00000000;
 	read_control_go = 1'b0;
-	read_control_read_base = address;
+	read_control_read_base = r_address;
 	read_user_read_buffer = 1'b0;
 	rd_data = 32'hbad1bad1;
 	count_read = 1'b0;
@@ -184,21 +217,35 @@ always_comb begin
 			if (!write_user_buffer_full) begin
 				write_user_write_buffer = 1'b1;
 				write_control_go = 1'b1;		
-				write_control_write_base = address;
+				write_control_write_base = w_address;
 				write_user_buffer_data = wr_data;
 			end 
 		end
 		READ_REQ: begin
 			read_control_go = 1'b1;
-			read_control_read_base = address;
+			read_control_read_base = r_address;
 			end
 		READ_ACK: begin
 			read_user_read_buffer = 1'b1;
 		end
-		READ_DATA: begin
-		end
-		BLOCK : begin
+		BLOCK_IDLE : begin
+			// check for start found and write data to design core
 			count_read = 1'b1;
+		end
+		BLOCK_READ_REQ: begin
+			read_control_go = 1'b1;
+			read_control_read_base = r_address;
+		end
+		BLOCK_READ_ACK: begin 
+			read_user_read_buffer = 1'b1;
+		end
+		BLOCK_WRITE: begin
+			if (!write_user_buffer_full) begin
+				write_user_write_buffer = 1'b1;
+				write_control_go = 1'b1;		
+				write_control_write_base = w_address;
+				write_user_buffer_data = wr_data;
+			end 
 		end
 		default: begin
 		end
