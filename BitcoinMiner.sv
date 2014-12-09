@@ -95,6 +95,20 @@ module BitcoinMiner (
 	logic usr_rd_buffer_nonempty;
 	logic indicator;
 	logic [31:0] display_data;
+	
+	// Bitcoin specific variables
+	logic rdwr_cntl;
+	logic n_action;
+	logic [27:0] mm_address;
+	logic add_data_sel;
+	logic [31:0] counter;
+	logic [3:0] start_found;
+	logic [1:0] sol_response;
+	logic sol_claim;
+	logic [31:0] block_data;
+	logic [31:0] data_to_write;
+	logic [31:0] data_to_read;
+	logic data_available;
 /* 
 pll pll_inst(
 	.inclk0( CLOCK_50) ,
@@ -108,7 +122,7 @@ pll pll_inst(
 	assign soc_clk = CLOCK_50;
 	
 
-	assign DRAM_CLK = CLOCK_50;
+	// assign DRAM_CLK = CLOCK_50;
 	
 		
 	always_ff @(posedge CLOCK_50) begin
@@ -142,7 +156,7 @@ pll pll_inst(
 //amm_master_qsys amm_master_inst  ( 
 amm_master_qsys_with_pcie amm_master_inst  ( 
 	.clk_clk	(soc_clk),  				  // clk.clk
-	.reset_reset_n	(KEY[1]),                  	          // reset.reset_n
+	.reset_reset_n	(KEY[0]),                  	          // reset.reset_n
 //       			.altpll_sdram_clk                       (DRAM_CLK),
 //						.sdram_addr			(DRAM_ADDR),         			  // new_sdram_controller_0_wire.addr
 //                .sdram_ba				(DRAM_BA),           			  // ba
@@ -183,42 +197,51 @@ amm_master_qsys_with_pcie amm_master_inst  (
  
 // TOP LEVEL
 
+/*
 mem_manager mem_manager_inst (
 	.clk(soc_clk),
-	.reset(KEY[1]),
+	.reset(KEY[0]),
 	.rdwr_cntl(rdwr_cntl),
 	.n_action(n_action),
 	.mm_address(mm_address),
 	.add_data_sel(add_data_sel),
-	.read_user_data_available(usr_rd_buffer_nonempty),
+	// .counter(counter),
+	.read_user_data_available(usr_rd_buffer),
 	.read_user_buffer_output_data(usr_rd_buffer_data),
 	.write_control_done(ctl_wr_done),
 	.start_found(start_found),
 	.sol_response(sol_response),
-	.in_data(in_data),
+	// .in_data(nonce),
 	.sol_claim(sol_claim),
-	.out_data(out_data)
+	.out_data(block_data),
+	.data_to_write(data_to_write),
+	.data_to_read(data_to_read),
+	.data_available(data_available)
 );
-
+*/
+/*
 design_core design_core_inst (
   .clk(soc_clk), 
   .n_rst(KEY[1]), 
   .start_found(start_found),
   .sol_response(sol_response),
-  .in_data(in_data),
+  .in_data(block_data),
   .sol_claim(sol_claim),
-  .out_data(out_data)
+  .out_data(nonce)
 );
+*/
 
 user_logic user_logic_inst (
 	.clk(soc_clk),
-	.reset(KEY[1]),
-	.rdwr_cntl(rdwr_cntl),
+	.reset(KEY[0]),
+	//.rdwr_cntl(rdwr_cntl),
 	.n_action(n_action),
 	.add_data_sel(add_data_sel),
-	.mm_address(mm_address),
+	//.mm_address(mm_address),
 	.indicator(indicator),
 	.display_data(display_data),
+	// .counter(counter),
+	// .start_found(start_found),
 	.write_control_fixed_location(ctl_wr_fixed_location),
 	.write_control_write_base(ctl_wr_addr_base),
 	.write_control_write_length(ctl_wr_length),
@@ -229,6 +252,7 @@ user_logic user_logic_inst (
 	.write_user_write_buffer(usr_wr_buffer),
 	.write_user_buffer_data(usr_wr_buffer_data),
 	.write_user_buffer_full(usr_wr_buffer_full),
+	//.data_to_write(data_to_write),
 
 	.read_control_fixed_location(ctl_rd_fixed_location),
 	.read_control_read_base(ctl_rd_addr_base),
@@ -239,8 +263,9 @@ user_logic user_logic_inst (
 
 	.read_user_read_buffer(usr_rd_buffer),
 	.read_user_buffer_output_data(usr_rd_buffer_data),
-	.read_user_data_available(usr_rd_buffer_nonempty)
-	
+	.read_user_data_available(usr_rd_buffer_nonempty),
+	//.data_to_read(data_to_read),
+	//.data_available(data_available)
 );
 SEG_HEX hex0(
 	   .iDIG(display_data[31:28]),         

@@ -15,10 +15,12 @@ module stp_sr_16 (
   wire [31:0] p_out [15:0];
   genvar i;
   
-  for (i = 0; i < 16; i++) begin
-    assign parallel_out [32*(i+1)-1: 32*i] = p_out[i];
-  end
-  
+	generate
+		for (i = 0; i < 16; i++) begin : pout16
+			assign parallel_out [32*(i+1)-1: 32*i] = p_out[i];
+		end
+	endgenerate
+	
   stp_sr #(16) SR (
     .clk(clk),
     .n_rst(n_rst),
