@@ -23,7 +23,7 @@ module sha_output_manager
    
    
    generate
-   for (m = 0; m < NUM_CORES; m++) begin
+   for (m = 0; m < NUM_CORES; m++) begin : reset
      always_ff @ (posedge clk, negedge n_rst) begin
        if (n_rst == 0) rf[33*(m+1) - 1:33*m] <= 33'd17179869183;
        else if (enable == 1'b1) rf[33*(m+1) - 1:33*m] <= data_in[33*(m+1) - 1:33*m];
@@ -33,13 +33,13 @@ module sha_output_manager
    endgenerate
    
    generate
-   for (i = 0; i < NUM_CORES; i++) begin
+   for (i = 0; i < NUM_CORES; i++) begin: reset2
      assign flag[i] = data_in[33*(i + 1) - 1];
    end
    endgenerate
    
    generate
-   for (j = 0; j < 32; j++) begin
+   for (j = 0; j < 32; j++) begin: reset3
        always_comb begin
           golden_nonce[j] = 1'b0;
           for (k[j] = 0; k[j] < NUM_CORES; k[j]++) begin

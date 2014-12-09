@@ -109,6 +109,7 @@ module BitcoinMiner (
 	logic [31:0] data_to_write;
 	logic [31:0] data_to_read;
 	logic data_available;
+	logic shift_in_enable;
 /* 
 pll pll_inst(
 	.inclk0( CLOCK_50) ,
@@ -197,39 +198,16 @@ amm_master_qsys_with_pcie amm_master_inst  (
  
 // TOP LEVEL
 
-/*
-mem_manager mem_manager_inst (
-	.clk(soc_clk),
-	.reset(KEY[0]),
-	.rdwr_cntl(rdwr_cntl),
-	.n_action(n_action),
-	.mm_address(mm_address),
-	.add_data_sel(add_data_sel),
-	// .counter(counter),
-	.read_user_data_available(usr_rd_buffer),
-	.read_user_buffer_output_data(usr_rd_buffer_data),
-	.write_control_done(ctl_wr_done),
-	.start_found(start_found),
-	.sol_response(sol_response),
-	// .in_data(nonce),
-	.sol_claim(sol_claim),
-	.out_data(block_data),
-	.data_to_write(data_to_write),
-	.data_to_read(data_to_read),
-	.data_available(data_available)
-);
-*/
-/*
 design_core design_core_inst (
   .clk(soc_clk), 
   .n_rst(KEY[1]), 
   .start_found(start_found),
+  .shift_in_enable(shift_in_enable),
   .sol_response(sol_response),
   .in_data(block_data),
   .sol_claim(sol_claim),
   .out_data(nonce)
 );
-*/
 
 user_logic user_logic_inst (
 	.clk(soc_clk),
@@ -264,6 +242,12 @@ user_logic user_logic_inst (
 	.read_user_read_buffer(usr_rd_buffer),
 	.read_user_buffer_output_data(usr_rd_buffer_data),
 	.read_user_data_available(usr_rd_buffer_nonempty),
+	.core_in(nonce),
+	.sol_claim(sol_claim),
+	.shift_out_enable(shift_in_enable),
+	.sol_response(sol_response),
+	.start_out(start_found),
+	.core_out(block_data)
 	//.data_to_read(data_to_read),
 	//.data_available(data_available)
 );

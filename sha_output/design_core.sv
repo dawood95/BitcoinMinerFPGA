@@ -10,6 +10,7 @@ module design_core (
   input wire clk, n_rst, start_found,
   input wire sol_response,
   input wire [31:0] in_data,
+  input wire shift_in_enable,
   output wire sol_claim,
   output wire [31:0] out_data
 );
@@ -39,6 +40,7 @@ module design_core (
   timer_proj TMR (
     .clk(clk),
     .start_found(start_found),
+	 .shift_in_enable(shift_in_enable),
     .controller_state(state),
     .midstate_shifts_done(midstate_shifts_done),
     .remaining_shifts_done(remaining_shifts_done)
@@ -47,7 +49,7 @@ module design_core (
   stp_sr_8 MID_SR (
     .clk(clk),
     .n_rst(~(idleState || start_found)), //reset when idle
-    .shift_enable(midState),
+    .shift_enable(midState && shift_in_enable),
     .serial_in(in_data),
     .parallel_out(midData)
   );
@@ -55,7 +57,7 @@ module design_core (
   stp_sr_16 HEAD_SR (
     .clk(clk),
     .n_rst(~(idleState || start_found)), //reset when idle
-    .shift_enable(headState),
+    .shift_enable(headState && shift_in_enable),
     .serial_in(in_data),
     .parallel_out(headData)
   );

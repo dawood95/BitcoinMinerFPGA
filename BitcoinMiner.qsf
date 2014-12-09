@@ -531,6 +531,7 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 
 # set_global_assignment -name QSYS_FILE amm_master_qsys_with_pcie.qsys
 
+set_global_assignment -name SYSTEMVERILOG_FILE sha_output/sha_output_manager.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha/ss2.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha/ss1.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha_output/stp_sr_16.sv
@@ -544,7 +545,6 @@ set_global_assignment -name VERILOG_FILE ip/Master_Template/burst_read_master.v
 set_global_assignment -name SYSTEMVERILOG_FILE timer_controller/timer_proj.sv
 set_global_assignment -name SYSTEMVERILOG_FILE timer_controller/controller_proj.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha_output/stp_sr.sv
-set_global_assignment -name SYSTEMVERILOG_FILE sha/sha_output_manager.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha/sha_math.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha/sha_datashift.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sha/sha_core.sv

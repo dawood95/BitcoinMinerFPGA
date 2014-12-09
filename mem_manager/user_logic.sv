@@ -35,9 +35,13 @@ module user_logic #(
 	output logic read_user_read_buffer,		// Read signal
 	input logic [DATAWIDTH-1:0]read_user_buffer_output_data,// Valid data to be read when user_data_available is asserted
 	input logic read_user_data_available,		//Read data is available.Assert user_read_buffer only when this is asserted.
-	
+	// interface with design core 
 	input logic [31:0] core_in,
-	input logic sol_claim
+	input logic sol_claim,
+	output logic shift_out_enable,
+	output logic sol_response,
+	output logic start_out,
+	output logic [31:0] core_out
 );
 
 
@@ -94,6 +98,9 @@ always_comb begin
 	else 
 		indicator = 0;
 end
+
+// alert core of new data
+assign start_out = start_found;
 
 always_ff @ (posedge clk) begin
 	if(!reset) begin
@@ -254,6 +261,8 @@ always_comb begin
 	read_control_read_base = r_address;
 	read_user_read_buffer = 1'b0;
 	rd_data = 32'hbad1bad1;
+	core_out = 0;
+	shift_out_enable = 0;
 	// count_read = 1'b0;
 	
 	case(state)
@@ -287,6 +296,10 @@ always_comb begin
 		BLOCK_READ_ACK: begin 
 			read_user_read_buffer = 1'b1;
 		end
+		BLOCK_READ_DATA: begin
+			core_out = read_data;
+			shift_out_enable = 1'b1;
+		end 
 		BLOCK_WRITE: begin
 			if (!write_user_buffer_full) begin
 				write_user_write_buffer = 1'b1;
