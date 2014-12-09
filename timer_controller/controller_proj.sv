@@ -6,7 +6,7 @@ module controller_proj
   input wire midstate_shifts_done,
   input wire remaining_shifts_done,
   input wire sol_claim,
-  input wire [1:0] sol_response,
+  input wire sol_response,
   output wire idleState, midState, headState, solveState,
   output wire [2:0] state
 );
@@ -40,12 +40,16 @@ module controller_proj
       LOAD_MIDSTATE: begin
         if(start_found == 1'b1 || midstate_shifts_done == 1'b0)
           next_state = LOAD_MIDSTATE;
+        else if (sol_response == 1'b1)
+          next_state = IDLE;
         else
           next_state = LOAD_REMAINING_HEADER;
       end
       LOAD_REMAINING_HEADER: begin
 	if(start_found == 1'b1)
           next_state = LOAD_MIDSTATE;
+        else if (sol_response == 1'b1)
+          next_state = IDLE;
         else if(remaining_shifts_done == 1'b0)
           next_state = LOAD_REMAINING_HEADER;
         else
@@ -54,6 +58,8 @@ module controller_proj
       SOLVE: begin
 	if(start_found == 1'b1)
           next_state = LOAD_MIDSTATE;
+        else if (sol_response == 1'b1)
+          next_state = IDLE;
         else if (sol_claim == 1'b1)
           next_state = HALT;
         else 
@@ -62,12 +68,10 @@ module controller_proj
       HALT: begin
         if(start_found == 1'b1)
           next_state = LOAD_MIDSTATE;
-        else if (sol_response == 2'b00)
-          next_state = HALT;
-        else if (sol_response == 2'b01)
-          next_state = SOLVE;
-        else
+        else if (sol_response == 1'b1)
           next_state = IDLE;
+        else
+          next_state = SOLVE;
       end
     endcase
   end
