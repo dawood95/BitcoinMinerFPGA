@@ -34,7 +34,10 @@ module user_logic #(
 	// user logic data interface to read master 
 	output logic read_user_read_buffer,		// Read signal
 	input logic [DATAWIDTH-1:0]read_user_buffer_output_data,// Valid data to be read when user_data_available is asserted
-	input logic read_user_data_available		//Read data is available.Assert user_read_buffer only when this is asserted.
+	input logic read_user_data_available,		//Read data is available.Assert user_read_buffer only when this is asserted.
+	
+	input logic [31:0] core_in,
+	input logic sol_claim
 );
 
 
@@ -47,21 +50,31 @@ assign read_control_read_length = 4;
 logic start_found, next_start_found, display_start_found;
 logic [7:0] rd_count; 
 logic [7:0] next_rd_count;
+logic [31:0] nonce_found;
+logic [31:0] next_nonce_found;
 logic mine_block = 28'h8000008; 
 logic nonce_block = 28'h8000068; // 96 bytes later
 
 logic [ADDRESSWIDTH-1:0] r_address, r_nextAddress, w_address, w_nextAddress;
 logic [DATAWIDTH-1:0] rd_data, wr_data, nextData; 
 logic [DATAWIDTH-1:0] nextRead_data, read_data;
-typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA, BLOCK_IDLE, BLOCK_READ_REQ, 
-	BLOCK_READ_WAIT, BLOCK_READ_ACK, BLOCK_READ_DATA, BLOCK_WRITE, BLOCK_WRITE_WAIT} state_t;
+typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA, 
+	BLOCK_IDLE, BLOCK_READ_REQ, BLOCK_READ_WAIT, BLOCK_READ_ACK, BLOCK_READ_DATA, 
+	BLOCK_WRITE, BLOCK_WRITE_WAIT, WATCH_NONCE, PAUSE} state_t;
 state_t state, nextState;
 
 // assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
 
-assign display_data[31:24] = r_address[27:20]; // r_address[27:20];
-assign display_data[23:16] = rd_count;
-assign display_data[15:0] = r_address[15:0];
+always_comb begin
+	if (nonce_found) begin 
+		display_data = nonce_found;
+	end else begin
+		display_data[31:24] = r_address[27:20]; // r_address[27:20];
+		display_data[23:16] = rd_count;
+		display_data[15:0] = r_address[15:0];
+	end
+end 
+
 /*
 assign display_start_found = start_found;
 assign display_data[3:0] = {3'b0,display_start_found};
@@ -69,9 +82,11 @@ assign display_data[27:0] = r_address;
 */
 
 // read counter
+/*
 logic [7:0] total_reads;
 logic count_read;
 counter #(8) cntr(.clk(clk),.n_rst(!reset),.enable(count_read),.rollover_val(8'd24),.count_out(total_reads));
+*/
 
 always_comb begin 
 	if ((r_address > 28'h00000000) & !rdwr_cntl) 
@@ -89,6 +104,7 @@ always_ff @ (posedge clk) begin
 		read_data <= 32'hFEEDFEED; 
 		start_found <= 0;
 		rd_count <= 0;
+		nonce_found <= 0;
 	end else begin
 		state <= nextState;
 		r_address <= r_nextAddress;
@@ -97,6 +113,7 @@ always_ff @ (posedge clk) begin
 		read_data <= nextRead_data;
 		start_found <= next_start_found;
 		rd_count <= next_rd_count;
+		nonce_found <= next_nonce_found;
 	end
 end	
 
@@ -110,6 +127,7 @@ always_comb begin
 	nextRead_data = read_data;
 	next_start_found = start_found;
 	next_rd_count = rd_count;
+	next_nonce_found = nonce_found;
 	
 	/**
 		Default solve response should be 0 for still checking or incorrect solution.
@@ -177,7 +195,7 @@ always_comb begin
 		BLOCK_IDLE: begin
 			// state should be hit 24 times, each before the read
 			if (rd_count == 8'd24) begin
-				nextState = IDLE;
+				nextState = IDLE; // WATCH_NONCE?
 			end else begin
 				next_rd_count++;
 				nextState = BLOCK_READ_REQ;
@@ -200,6 +218,7 @@ always_comb begin
 		BLOCK_READ_DATA: begin
 			nextState = BLOCK_WRITE;
 			// w_nextAddress = w_nextAddress + 4;
+			// write to core here !!
 			nextData = read_data;
 		end
 		BLOCK_WRITE: begin
@@ -207,6 +226,18 @@ always_comb begin
 		end
 		BLOCK_WRITE_WAIT: begin
 			nextState = BLOCK_IDLE;
+		end
+		WATCH_NONCE: begin
+			if (sol_claim) begin
+ 				next_nonce_found = core_in;
+				nextState = PAUSE;
+			end else begin
+				next_nonce_found = 0;
+				nextState = WATCH_NONCE;
+			end
+		end
+		PAUSE: begin
+			nextState = PAUSE;
 		end
 		default: begin
 		end
@@ -223,7 +254,7 @@ always_comb begin
 	read_control_read_base = r_address;
 	read_user_read_buffer = 1'b0;
 	rd_data = 32'hbad1bad1;
-	count_read = 1'b0;
+	// count_read = 1'b0;
 	
 	case(state)
 		IDLE: begin
@@ -247,7 +278,7 @@ always_comb begin
 		end
 		BLOCK_IDLE : begin
 			// check for start found and write data to design core
-			count_read = 1'b1;
+			// count_read = 1'b1;
 		end
 		BLOCK_READ_REQ: begin
 			read_control_go = 1'b1;
