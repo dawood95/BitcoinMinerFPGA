@@ -12,8 +12,7 @@ module user_logic #(
 	input logic n_action,
 	output logic indicator,
 	input logic add_data_sel,
-	input logic [3:0] counter,
-	input logic [ADDRESSWIDTH-1:0] mm_address,
+	input logic [ADDRESSWIDTH-1:0] read_address,
 	output logic[DATAWIDTH-1:0] display_data,
 	
 	// Control interface to write master
@@ -26,7 +25,6 @@ module user_logic #(
 	output logic write_user_write_buffer,  		 	// Write signal
 	output logic [DATAWIDTH-1:0] write_user_buffer_data,    // Write Data
 	input logic write_user_buffer_full,				// Buffer full signal. Don't write if asserted
-	input logic [DATAWIDTH-1:0] data_to_write, 	// Would be the possible nonce
 	// Control interface to read master
 	input logic read_control_done,//Asserted and held when Master is done writing last word.Start next request on the next cycle.	
 	output logic read_control_fixed_location,	    	//When set Master will not increment address
@@ -42,20 +40,29 @@ module user_logic #(
 
 assign write_control_write_length = 4;
 assign write_control_fixed_location = 1'b1;
-assign read_control_fixed_location = 1'b1; // change this at some point??
+assign read_control_fixed_location = 1'b1;
 assign read_control_read_length = 4;
 
+// my variables
+logic start_found, next_start_found, display_start_found;
+logic mine_block = 28'h8000008; 
+logic nonce_block = 28'h8000068; // 96 bytes later
 
 logic [ADDRESSWIDTH-1:0] address, nextAddress;
 logic [DATAWIDTH-1:0] rd_data, wr_data, nextData; 
 logic [DATAWIDTH-1:0] nextRead_data, read_data;
-typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA} state_t;
+typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA, BLOCK} state_t;
 state_t state, nextState;
 
 // assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
-assign display_data[31:8] = wr_data;
-assign display_data[7:4] = counter;
-assign display_data[3:0] = {3'd0,rdwr_cntl};
+assign display_data[31:4] = address;
+assign display_start_found = start_found;
+assign display_data[3:0] = {3'b0,display_start_found};
+
+// read counter
+logic [4:0] total_reads;
+logic count_read;
+counter #(5) cntr(.clk(clk),.n_rst(!reset),.enable(count_read),.rollover_val(6'd23),.count_out(total_reads));
 
 always_comb begin 
 	if ((address > 28'h00000000) & !rdwr_cntl) 
@@ -70,44 +77,54 @@ always_ff @ (posedge clk) begin
 		state <= IDLE ;
 		wr_data <= 0;
 		read_data <= 32'hFEEDFEED; 
+		start_found <= 0;
 	end else begin
 		state <= nextState;
 		address <= nextAddress;
-		//address <= 28'h00000004;
 		wr_data <= nextData;
-		//wr_data <= 32'hf00fbeeb;
-		//wr_data <= 32'hdeadbeef;
 		read_data <= nextRead_data;
+		start_found <= next_start_found;
 	end
 end	
+
 
 // Next State Logic 
 always_comb begin
 	nextState = state;
 	nextAddress = address;
 	nextData = wr_data;
-	// nextData = read_data;
 	nextRead_data = read_data;
+	next_start_found = start_found;
 	case(state)
 		IDLE: begin //writes take priority
+			/*
 			if(rdwr_cntl & !n_action) begin
 				nextState = WRITE;
-				nextAddress = mm_address;
-				// nextAddress = address + BYTEENABLEWIDTH;
-				nextData = data_to_write; // !! this is where write data goes                                                       
-				// nextData = read_data;
-				// nextData = wr_data + 4;
-			end else if (!rdwr_cntl & !n_action) begin 
+				nextAddress = address + BYTEENABLEWIDTH;
+				nextData = wr_data + 4 ;
+			end else if (!rdwr_cntl & !n_action) begin f
 				nextState = READ_REQ;
-				// nextAddress =  address - BYTEENABLEWIDTH;
-				nextAddress = mm_address;
+				nextAddress =  address - BYTEENABLEWIDTH;
+			end
+			*/
+			
+			if (read_data == 32'hAAAA0000) begin 
+				nextState = BLOCK;
+				nextAddress = 28'h8000004;
+				next_start_found = 1'b1;
+			end else begin
+				nextState = READ_REQ;
+				nextAddress = 28'h8000000;
+				next_start_found = 1'b0;
 			end
 		end
 		WRITE: begin
 			nextState = WRITE_WAIT;
 		end
 		WRITE_WAIT: begin
-			if (write_control_done) begin
+			if (write_control_done && start_found == 1'b1) begin
+				nextState = BLOCK;
+			end else begin
 				nextState = IDLE;
 			end
 		end
@@ -122,13 +139,24 @@ always_comb begin
 		READ_ACK: begin
 			nextState = READ_DATA;
 			nextRead_data = read_user_buffer_output_data;
-			// display_data = read_user_buffer_output_data;
-			// nextData = read_user_buffer_output_data;
-
 		end
 		READ_DATA: begin
-			nextState = IDLE;
-		//	nextRead_data = read_user_buffer_output_data;
+			if (start_found == 1'b1) begin
+				nextState = WRITE;
+				nextData = read_data;
+				nextAddress = nonce_block;
+			end else begin 
+				nextState = IDLE;
+			end 
+		end
+		BLOCK: begin
+			// state should be hit 24 times, before the read
+			if (total_reads == 5'd23) begin
+				nextState = IDLE;
+			end else begin
+				nextState = READ_REQ;
+				nextAddress = nextAddress + 4;
+			end
 		end
 		default: begin
 		end
@@ -144,7 +172,9 @@ always_comb begin
 	read_control_go = 1'b0;
 	read_control_read_base = address;
 	read_user_read_buffer = 1'b0;
-	rd_data = 32'hbad1bad1; // not used 
+	rd_data = 32'hbad1bad1;
+	count_read = 1'b0;
+	
 	case(state)
 		IDLE: begin
 			write_control_go = 1'b0;
@@ -152,25 +182,23 @@ always_comb begin
 		end
 		WRITE: begin
 			if (!write_user_buffer_full) begin
-			write_user_write_buffer = 1'b1;
-			write_control_go = 1'b1;		
-			write_control_write_base = address;
-			write_user_buffer_data = wr_data;
-			// display_data = wr_data;
+				write_user_write_buffer = 1'b1;
+				write_control_go = 1'b1;		
+				write_control_write_base = address;
+				write_user_buffer_data = wr_data;
 			end 
 		end
 		READ_REQ: begin
-				read_control_go = 1'b1;
-				read_control_read_base = address;
-				
-				end
+			read_control_go = 1'b1;
+			read_control_read_base = address;
+			end
 		READ_ACK: begin
-			//if(read_user_data_available) begin
-				read_user_read_buffer = 1'b1;
-			//end
+			read_user_read_buffer = 1'b1;
 		end
 		READ_DATA: begin
-			//rd_data = read_user_buffer_output_data;
+		end
+		BLOCK : begin
+			count_read = 1'b1;
 		end
 		default: begin
 		end
