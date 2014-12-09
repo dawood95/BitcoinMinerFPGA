@@ -45,21 +45,28 @@ assign read_control_read_length = 4;
 
 // my variables
 logic start_found, next_start_found, display_start_found;
+logic [7:0] rd_count; 
+logic [7:0] next_rd_count;
 logic mine_block = 28'h8000008; 
 logic nonce_block = 28'h8000068; // 96 bytes later
 
 logic [ADDRESSWIDTH-1:0] r_address, r_nextAddress, w_address, w_nextAddress;
 logic [DATAWIDTH-1:0] rd_data, wr_data, nextData; 
 logic [DATAWIDTH-1:0] nextRead_data, read_data;
-typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA, BLOCK_IDLE, BLOCK_READ_REQ, BLOCK_READ_WAIT, BLOCK_READ_ACK, BLOCK_READ_DATA, BLOCK_WRITE, BLOCK_WRITE_WAIT} state_t;
+typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA, BLOCK_IDLE, BLOCK_READ_REQ, 
+	BLOCK_READ_WAIT, BLOCK_READ_ACK, BLOCK_READ_DATA, BLOCK_WRITE, BLOCK_WRITE_WAIT} state_t;
 state_t state, nextState;
 
 // assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
-assign display_data[31:24] = total_reads; // r_address[27:20];
-assign display_data[23:16] = read_data[31:24];
-assign display_data[15:4] = r_address[11:0];
+
+assign display_data[31:24] = r_address[27:20]; // r_address[27:20];
+assign display_data[23:16] = rd_count;
+assign display_data[15:0] = r_address[15:0];
+/*
 assign display_start_found = start_found;
 assign display_data[3:0] = {3'b0,display_start_found};
+assign display_data[27:0] = r_address;
+*/
 
 // read counter
 logic [7:0] total_reads;
@@ -81,6 +88,7 @@ always_ff @ (posedge clk) begin
 		wr_data <= 0;
 		read_data <= 32'hFEEDFEED; 
 		start_found <= 0;
+		rd_count <= 0;
 	end else begin
 		state <= nextState;
 		r_address <= r_nextAddress;
@@ -88,6 +96,7 @@ always_ff @ (posedge clk) begin
 		wr_data <= nextData;
 		read_data <= nextRead_data;
 		start_found <= next_start_found;
+		rd_count <= next_rd_count;
 	end
 end	
 
@@ -100,6 +109,13 @@ always_comb begin
 	nextData = wr_data;
 	nextRead_data = read_data;
 	next_start_found = start_found;
+	next_rd_count = rd_count;
+	
+	/**
+		Default solve response should be 0 for still checking or incorrect solution.
+		1 if the solution is correct.
+	*/
+	
 	case(state)
 		IDLE: begin //writes take priority
 			/*
@@ -160,12 +176,13 @@ always_comb begin
 		end
 		BLOCK_IDLE: begin
 			// state should be hit 24 times, each before the read
-			if (total_reads == 5'd23) begin
+			if (rd_count == 8'd24) begin
 				nextState = IDLE;
 			end else begin
+				next_rd_count++;
 				nextState = BLOCK_READ_REQ;
 				r_nextAddress = r_nextAddress + 4;
-				w_nextAddress = r_nextAddress + 4;
+				w_nextAddress = w_nextAddress + 4;
 			end
 		end
 		BLOCK_READ_REQ: begin
@@ -182,7 +199,7 @@ always_comb begin
 		end
 		BLOCK_READ_DATA: begin
 			nextState = BLOCK_WRITE;
-			w_nextAddress = w_nextAddress + 4;
+			// w_nextAddress = w_nextAddress + 4;
 			nextData = read_data;
 		end
 		BLOCK_WRITE: begin
