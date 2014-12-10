@@ -17,11 +17,11 @@ module sha_block
     input wire 	       solveEn,
     input wire 	       loadState,
     output wire        flag,
-    output wire [31:0] goldenNonce
+    output wire [31:0] goldenNonce,
+	 output wire [31:0] sha_counter
     );
-   
+	
    genvar 	       i;
-   
    localparam [31:0] 	       nonceFactor = (32'd4294967295 / NCORE) + 1;
    
    reg [33*NCORE-1:0]  outputManagerIn;
@@ -31,6 +31,7 @@ module sha_block
    
    wire 	       clearCounter;
    
+	assign sha_counter = nonce;
    assign clearCounter = ~loadState;
    assign flag = (outputManagerFlag == 0) ? 1'b0 : 1'b1;
    

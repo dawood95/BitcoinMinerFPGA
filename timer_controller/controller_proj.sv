@@ -46,7 +46,7 @@ module controller_proj
           next_state = LOAD_REMAINING_HEADER;
       end
       LOAD_REMAINING_HEADER: begin
-	if(start_found == 1'b1)
+		  if(start_found == 1'b1)
           next_state = LOAD_MIDSTATE;
         else if (sol_response == 1'b1)
           next_state = IDLE;

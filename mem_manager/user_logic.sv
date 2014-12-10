@@ -44,7 +44,14 @@ module user_logic #(
 	output logic shift_out_enable,
 	output logic sol_response,
 	output logic start_out,
-	output logic [31:0] core_out
+	output logic [31:0] core_out,
+	input wire debug0,
+	input wire debug1,
+	input wire debug2,
+	input wire debug3,
+	input wire debug4,
+	input logic [255:0] midState,
+	input logic [511:0] headData
 );
 
 
@@ -63,13 +70,15 @@ logic mine_block = 28'h8000008;
 logic nonce_block = 28'h8000068; // 96 bytes later
 logic [1:0] loc_mm_debug;
 logic [1:0] loc_mm_debug_next;
+logic [3:0] is_solved;
+logic [3:0] next_is_solved;
 
 logic [ADDRESSWIDTH-1:0] r_address, r_nextAddress, w_address, w_nextAddress;
 logic [DATAWIDTH-1:0] rd_data, wr_data, nextData; 
 logic [DATAWIDTH-1:0] nextRead_data, read_data;
 typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA, 
 	BLOCK_IDLE, BLOCK_READ_REQ, BLOCK_READ_WAIT, BLOCK_READ_ACK, BLOCK_READ_DATA, 
-	BLOCK_WRITE, BLOCK_WRITE_WAIT, WATCH_NONCE, PAUSE} state_t;
+	BLOCK_WRITE, BLOCK_WRITE_WAIT, WATCH_NONCE, NONCE_WRITE, NONCE_WRITE_WAIT, PAUSE} state_t;
 state_t state, nextState;
 
 // assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
@@ -107,6 +116,94 @@ end
 // alert core of new data
 assign start_out = start_found;
 
+logic [4:0] debug;
+assign debug = {debug4,debug3,debug2,debug1,debug0};
+
+always_comb
+	begin : debugblock
+	mm_debug_data = 32'hEEEE1234;
+	case(debug)
+		5'd0: begin
+			mm_debug_data = midState[31:0];
+		end
+		5'd1: begin
+			mm_debug_data = midState[63:32];
+		end
+		5'd2: begin
+			mm_debug_data = midState[95:64];
+		end
+		5'd3: begin
+			mm_debug_data = midState[127:96];
+		end
+		5'd4: begin
+			mm_debug_data = midState[159:128];
+		end
+		5'd5: begin
+			mm_debug_data = midState[191:160];
+		end
+		5'd6: begin
+			mm_debug_data = midState[223:192];
+		end
+		5'd7: begin
+			mm_debug_data = midState[255:224];
+		end		
+		5'd8: begin
+			mm_debug_data = headData[31:0];
+		end
+		5'd9: begin
+			mm_debug_data = headData[63:32];
+		end
+		5'd10: begin
+			mm_debug_data = headData[95:64];
+		end
+		5'd11: begin
+			mm_debug_data = headData[127:96];
+		end
+		5'd12: begin
+			mm_debug_data = headData[159:128];
+		end
+		5'd13: begin
+			mm_debug_data = headData[191:160];
+		end
+		5'd14: begin
+			mm_debug_data = headData[223:192];
+		end
+		5'd15: begin
+			mm_debug_data = headData[255:224];
+		end	
+		5'd16: begin
+			mm_debug_data = headData[287:256];
+		end
+		5'd17: begin
+			mm_debug_data = headData[319:288];
+		end
+		5'd18: begin
+			mm_debug_data = headData[351:320];
+		end
+		5'd19: begin
+			mm_debug_data = headData[383:352];
+		end
+		5'd20: begin
+			mm_debug_data = headData[415:384];
+		end
+		5'd21: begin
+			mm_debug_data = headData[447:416];
+		end
+		5'd22: begin
+			mm_debug_data = headData[479:448];
+		end
+		5'd23: begin
+			mm_debug_data = headData[511:480];
+		end
+		5'd24: begin
+			mm_debug_data = 32'hAAAA1234;
+		end
+	endcase
+end
+	
+//assign mm_debug_data[31:4] = nonce_found[31:4];
+//assign mm_debug_data[3:0] = is_solved;
+
 // debuggin
 assign mm_debug_flag = loc_mm_debug;
 
@@ -121,6 +218,7 @@ always_ff @ (posedge clk) begin
 		rd_count <= 0;
 		nonce_found <= 0;
 		loc_mm_debug <= 2'b01;
+		is_solved <= 4'd2;
 	end else begin
 		state <= nextState;
 		r_address <= r_nextAddress;
@@ -131,6 +229,7 @@ always_ff @ (posedge clk) begin
 		rd_count <= next_rd_count;
 		nonce_found <= next_nonce_found;
 		loc_mm_debug <= loc_mm_debug_next;
+		is_solved <= next_is_solved;
 	end
 end	
 
@@ -146,6 +245,7 @@ always_comb begin
 	next_rd_count = rd_count;
 	next_nonce_found = nonce_found;
 	loc_mm_debug_next = loc_mm_debug;
+	next_is_solved = is_solved;
 	
 	/**
 		Default solve response should be 0 for still checking or incorrect solution.
@@ -219,6 +319,7 @@ always_comb begin
 				nextState = BLOCK_READ_REQ;
 				r_nextAddress = r_nextAddress + 4;
 				w_nextAddress = w_nextAddress + 4;
+				next_start_found = 1'b0;
 			end
 		end
 		BLOCK_READ_REQ: begin
@@ -246,14 +347,23 @@ always_comb begin
 			nextState = BLOCK_IDLE;
 		end
 		WATCH_NONCE: begin
-			loc_mm_debug_next = 1'b10;
+			loc_mm_debug_next = 2'b10;
 			if (sol_claim) begin
  				next_nonce_found = core_in;
-				nextState = PAUSE;
+				nextData = core_in;
+				nextState = NONCE_WRITE;
+				w_nextAddress = 28'h8000004;
+				next_is_solved = 4'd8;
 			end else begin
-				next_nonce_found = 0;
+				next_nonce_found = 32'hABABABAB;
 				nextState = WATCH_NONCE;
 			end
+		end
+		NONCE_WRITE: begin
+			nextState = NONCE_WRITE_WAIT;
+		end
+		NONCE_WRITE_WAIT: begin
+			nextState = PAUSE;
 		end
 		PAUSE: begin
 			loc_mm_debug_next = 1'b01;
@@ -279,9 +389,9 @@ always_comb begin
 	// count_read = 1'b0;
 	
 	// for debugging
-	mm_debug_data[31:24] = r_address[27:20]; // r_address[27:20];
-	mm_debug_data[23:16] = rd_count;
-	mm_debug_data[15:0] = r_address[15:0];
+	// mm_debug_data[31:24] = r_address[27:20]; // r_address[27:20];
+	// mm_debug_data[23:16] = rd_count;
+	// mm_debug_data[15:0] = r_address[15:0];
 	
 	case(state)
 		IDLE: begin
@@ -326,8 +436,16 @@ always_comb begin
 				write_user_buffer_data = wr_data;
 			end 
 		end
+		NONCE_WRITE: begin
+			if (!write_user_buffer_full) begin
+				write_user_write_buffer = 1'b1;
+				write_control_go = 1'b1;	
+				write_control_write_base = w_address;
+				write_user_buffer_data = wr_data;
+			end 
+		end
 		PAUSE: begin
-			mm_debug_data = nonce_found;
+			// mm_debug_data = nonce_found;
 		end
 		default: begin
 		end

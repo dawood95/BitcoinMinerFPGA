@@ -23,7 +23,7 @@ module nonceCounter
 	       
    assign roll = 32'd4294967295 / NCORE;
    assign enable = (cycle == 32'd63) ? 1'b1 : 0;
-   assign nonce = out;
+   assign nonce = out + 32'd411342200; // artificially increased for debugging
    counter #(32) cnt(.clk(clk),.n_rst(clearCounter),.enable(enable),.rollover_val(roll),.count_out(out));
    
    

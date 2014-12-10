@@ -13,7 +13,9 @@ module design_core (
   input wire shift_in_enable,
   output wire sol_claim,
   output wire [31:0] out_data,
-  output logic [31:0] dc_debug_data
+  output logic [31:0] dc_debug_data,
+  output logic [255:0] midData1,
+  output logic [511:0] headData1
 );
   
   // I/O Signals 
@@ -22,9 +24,16 @@ module design_core (
   wire idleState, midState, headState, solveState;
   wire [255:0] midData;
   wire [511:0] headData;
+  logic [31:0] count;
   
+  assign midData1 = midData;
+  assign headData1 = headData;
   // debug
-  assign dc_debug_data = headData[511:480];
+  // assign out_data = midData[31:0];
+  // assign sol_claim = 1'b1;
+  // assign dc_debug_data[31:16] = out_data[31:16];
+  // assign dc_debug_data[15:0] = in_data[15:0];
+  assign dc_debug_data = headData[479:448];
   
   controller_proj CTRL (
     .clk(clk),
@@ -73,6 +82,7 @@ module design_core (
     .solveEn(solveState),
     .loadState(midState || headState),
     .flag(sol_claim),
-    .goldenNonce(out_data)
+    .goldenNonce(out_data),
+	 .sha_counter(count)
   );
 endmodule

@@ -113,6 +113,8 @@ module BitcoinMiner (
 	logic data_available;
 	logic shift_in_enable;
 	logic [1:0] debug;
+	logic [255:0] midState;
+	logic [511:0] headData;
 /* 
 pll pll_inst(
 	.inclk0( CLOCK_50) ,
@@ -201,16 +203,18 @@ amm_master_qsys_with_pcie amm_master_inst  (
  
 // TOP LEVEL
 design_core design_core_inst (
-  .clk(soc_clk), 
-  .n_rst(KEY[1]), 
-  .start_found(start_found),
-  .shift_in_enable(shift_in_enable),
-  .sol_response(sol_response),
-  .in_data(block_data),
-  .sol_claim(sol_claim),
-  .out_data(nonce),
-  //.dc_debug_flag(debug),
-  .dc_debug_data(dc_display_data)
+	.clk(soc_clk), 
+	.n_rst(KEY[1]), 
+	.start_found(start_found),
+	.shift_in_enable(shift_in_enable),
+	.sol_response(sol_response),
+	.in_data(block_data),
+	.sol_claim(sol_claim),
+	.out_data(nonce),
+	//.dc_debug_flag(debug),
+	.dc_debug_data(dc_display_data),
+	.midData1(midState),
+	.headData1(headData)
 );
 
 user_logic user_logic_inst (
@@ -252,18 +256,25 @@ user_logic user_logic_inst (
 	.shift_out_enable(shift_in_enable),
 	.sol_response(sol_response),
 	.start_out(start_found),
-	.core_out(block_data)
+	.core_out(block_data),
 	//.data_to_read(data_to_read),
 	//.data_available(data_available)
+	.debug0(SW[13]),
+	.debug1(SW[14]),
+	.debug2(SW[15]),
+	.debug3(SW[16]),
+	.debug4(SW[17]),
+	.midState(midState),
+	.headData(headData)
 );
 
 always_comb begin
 	// display debug data from either mem manager or design core
-	if (debug == 2'b01) begin
-		display_data = mm_display_data;
-	end else begin
-		display_data = dc_display_data;
-	end
+	// if (debug == 2'b01) begin
+	display_data = mm_display_data;
+	// end else begin
+	// display_data = dc_display_data;
+	// end
 end
 
 SEG_HEX hex0(.iDIG(display_data[31:28]), .oHEX_D(HEX7));  
