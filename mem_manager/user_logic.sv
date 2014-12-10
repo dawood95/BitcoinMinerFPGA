@@ -51,7 +51,8 @@ module user_logic #(
 	input wire debug3,
 	input wire debug4,
 	input logic [255:0] midState,
-	input logic [511:0] headData
+	input logic [511:0] headData,
+	input logic [31:0] dc_display_data
 );
 
 
@@ -196,7 +197,10 @@ always_comb
 			mm_debug_data = headData[511:480];
 		end
 		5'd24: begin
-			mm_debug_data = 32'hAAAA1234;
+			mm_debug_data = nonce_found;
+		end
+		5'd25: begin
+			mm_debug_data = dc_display_data;
 		end
 	endcase
 end
@@ -355,7 +359,7 @@ always_comb begin
 				w_nextAddress = 28'h8000004;
 				next_is_solved = 4'd8;
 			end else begin
-				next_nonce_found = 32'hABABABAB;
+				//next_nonce_found = next_nonce_found;
 				nextState = WATCH_NONCE;
 			end
 		end

@@ -33,7 +33,7 @@ module design_core (
   // assign sol_claim = 1'b1;
   // assign dc_debug_data[31:16] = out_data[31:16];
   // assign dc_debug_data[15:0] = in_data[15:0];
-  assign dc_debug_data = headData[479:448];
+  assign dc_debug_data = count;
   
   controller_proj CTRL (
     .clk(clk),

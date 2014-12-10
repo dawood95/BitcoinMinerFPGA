@@ -115,6 +115,7 @@ module BitcoinMiner (
 	logic [1:0] debug;
 	logic [255:0] midState;
 	logic [511:0] headData;
+	logic [31:0] nonce;
 /* 
 pll pll_inst(
 	.inclk0( CLOCK_50) ,
@@ -265,7 +266,8 @@ user_logic user_logic_inst (
 	.debug3(SW[16]),
 	.debug4(SW[17]),
 	.midState(midState),
-	.headData(headData)
+	.headData(headData),
+	.dc_display_data(dc_display_data)
 );
 
 always_comb begin
