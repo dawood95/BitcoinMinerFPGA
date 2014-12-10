@@ -94,6 +94,8 @@ module BitcoinMiner (
 	logic [DATAWIDTH-1:0]usr_rd_buffer_data;
 	logic usr_rd_buffer_nonempty;
 	logic indicator;
+	logic [31:0] mm_display_data;
+	logic [31:0] dc_display_data;
 	logic [31:0] display_data;
 	
 	// Bitcoin specific variables
@@ -110,6 +112,7 @@ module BitcoinMiner (
 	logic [31:0] data_to_read;
 	logic data_available;
 	logic shift_in_enable;
+	logic [1:0] debug;
 /* 
 pll pll_inst(
 	.inclk0( CLOCK_50) ,
@@ -197,7 +200,6 @@ amm_master_qsys_with_pcie amm_master_inst  (
  
  
 // TOP LEVEL
-
 design_core design_core_inst (
   .clk(soc_clk), 
   .n_rst(KEY[1]), 
@@ -206,7 +208,9 @@ design_core design_core_inst (
   .sol_response(sol_response),
   .in_data(block_data),
   .sol_claim(sol_claim),
-  .out_data(nonce)
+  .out_data(nonce),
+  //.dc_debug_flag(debug),
+  .dc_debug_data(dc_display_data)
 );
 
 user_logic user_logic_inst (
@@ -217,7 +221,8 @@ user_logic user_logic_inst (
 	.add_data_sel(add_data_sel),
 	//.mm_address(mm_address),
 	.indicator(indicator),
-	.display_data(display_data),
+	.mm_debug_data(mm_display_data),
+	.mm_debug_flag(debug),
 	// .counter(counter),
 	// .start_found(start_found),
 	.write_control_fixed_location(ctl_wr_fixed_location),
@@ -251,37 +256,23 @@ user_logic user_logic_inst (
 	//.data_to_read(data_to_read),
 	//.data_available(data_available)
 );
-SEG_HEX hex0(
-	   .iDIG(display_data[31:28]),         
-	   .oHEX_D(HEX7)
-           );  
-SEG_HEX hex1(                              
-           .iDIG(display_data[27:24]),
-           .oHEX_D(HEX6)
-           );
-SEG_HEX hex2(                           
-           .iDIG(display_data[23:20]),
-           .oHEX_D(HEX5)
-           );
-SEG_HEX hex3(                              
-           .iDIG(display_data[19:16]),
-           .oHEX_D(HEX4)
-           );
-SEG_HEX hex4(                               
-           .iDIG(display_data[15:12]),
-           .oHEX_D(HEX3)
-           );
-SEG_HEX hex5(                          
-           .iDIG(display_data[11:8]), 
-           .oHEX_D(HEX2)
-           );
-SEG_HEX hex6(                      
-           .iDIG(display_data[7:4]),
-           .oHEX_D(HEX1)
-           );
-SEG_HEX hex7(              
-           .iDIG(display_data[3:0]) ,
-           .oHEX_D(HEX0)
-           );
+
+always_comb begin
+	// display debug data from either mem manager or design core
+	if (debug == 2'b01) begin
+		display_data = mm_display_data;
+	end else begin
+		display_data = dc_display_data;
+	end
+end
+
+SEG_HEX hex0(.iDIG(display_data[31:28]), .oHEX_D(HEX7));  
+SEG_HEX hex1(.iDIG(display_data[27:24]), .oHEX_D(HEX6));
+SEG_HEX hex2(.iDIG(display_data[23:20]), .oHEX_D(HEX5));
+SEG_HEX hex3(.iDIG(display_data[19:16]), .oHEX_D(HEX4));
+SEG_HEX hex4(.iDIG(display_data[15:12]), .oHEX_D(HEX3));
+SEG_HEX hex5(.iDIG(display_data[11:8]), .oHEX_D(HEX2));
+SEG_HEX hex6(.iDIG(display_data[7:4]), .oHEX_D(HEX1));
+SEG_HEX hex7(.iDIG(display_data[3:0]), .oHEX_D(HEX0));
 
 endmodule 

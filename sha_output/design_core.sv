@@ -12,7 +12,8 @@ module design_core (
   input wire [31:0] in_data,
   input wire shift_in_enable,
   output wire sol_claim,
-  output wire [31:0] out_data
+  output wire [31:0] out_data,
+  output logic [31:0] dc_debug_data
 );
   
   // I/O Signals 
@@ -21,6 +22,9 @@ module design_core (
   wire idleState, midState, headState, solveState;
   wire [255:0] midData;
   wire [511:0] headData;
+  
+  // debug
+  assign dc_debug_data = headData[511:480];
   
   controller_proj CTRL (
     .clk(clk),

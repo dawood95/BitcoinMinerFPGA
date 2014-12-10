@@ -13,7 +13,10 @@ module user_logic #(
 	output logic indicator,
 	input logic add_data_sel,
 	input logic [ADDRESSWIDTH-1:0] read_address,
-	output logic[DATAWIDTH-1:0] display_data,
+	
+	// debuggin
+	output logic[DATAWIDTH-1:0] mm_debug_data,
+	output logic [1:0] mm_debug_flag,
 	
 	// Control interface to write master
 	input  logic write_control_done,	 		   // Asserted and held when Master is done writing last word.Start next request on the next cycle.	
@@ -58,6 +61,8 @@ logic [31:0] nonce_found;
 logic [31:0] next_nonce_found;
 logic mine_block = 28'h8000008; 
 logic nonce_block = 28'h8000068; // 96 bytes later
+logic [1:0] loc_mm_debug;
+logic [1:0] loc_mm_debug_next;
 
 logic [ADDRESSWIDTH-1:0] r_address, r_nextAddress, w_address, w_nextAddress;
 logic [DATAWIDTH-1:0] rd_data, wr_data, nextData; 
@@ -69,15 +74,15 @@ state_t state, nextState;
 
 // assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
 
+/*
 always_comb begin
 	if (nonce_found) begin 
 		display_data = nonce_found;
 	end else begin
-		display_data[31:24] = r_address[27:20]; // r_address[27:20];
-		display_data[23:16] = rd_count;
-		display_data[15:0] = r_address[15:0];
+		
 	end
 end 
+*/
 
 /*
 assign display_start_found = start_found;
@@ -102,6 +107,9 @@ end
 // alert core of new data
 assign start_out = start_found;
 
+// debuggin
+assign mm_debug_flag = loc_mm_debug;
+
 always_ff @ (posedge clk) begin
 	if(!reset) begin
 		r_address <= 0;
@@ -112,6 +120,7 @@ always_ff @ (posedge clk) begin
 		start_found <= 0;
 		rd_count <= 0;
 		nonce_found <= 0;
+		loc_mm_debug <= 2'b01;
 	end else begin
 		state <= nextState;
 		r_address <= r_nextAddress;
@@ -121,6 +130,7 @@ always_ff @ (posedge clk) begin
 		start_found <= next_start_found;
 		rd_count <= next_rd_count;
 		nonce_found <= next_nonce_found;
+		loc_mm_debug <= loc_mm_debug_next;
 	end
 end	
 
@@ -135,6 +145,7 @@ always_comb begin
 	next_start_found = start_found;
 	next_rd_count = rd_count;
 	next_nonce_found = nonce_found;
+	loc_mm_debug_next = loc_mm_debug;
 	
 	/**
 		Default solve response should be 0 for still checking or incorrect solution.
@@ -202,7 +213,7 @@ always_comb begin
 		BLOCK_IDLE: begin
 			// state should be hit 24 times, each before the read
 			if (rd_count == 8'd24) begin
-				nextState = IDLE; // WATCH_NONCE?
+				nextState = WATCH_NONCE; // WATCH_NONCE?
 			end else begin
 				next_rd_count++;
 				nextState = BLOCK_READ_REQ;
@@ -235,6 +246,7 @@ always_comb begin
 			nextState = BLOCK_IDLE;
 		end
 		WATCH_NONCE: begin
+			loc_mm_debug_next = 1'b10;
 			if (sol_claim) begin
  				next_nonce_found = core_in;
 				nextState = PAUSE;
@@ -244,6 +256,7 @@ always_comb begin
 			end
 		end
 		PAUSE: begin
+			loc_mm_debug_next = 1'b01;
 			nextState = PAUSE;
 		end
 		default: begin
@@ -264,6 +277,11 @@ always_comb begin
 	core_out = 0;
 	shift_out_enable = 0;
 	// count_read = 1'b0;
+	
+	// for debugging
+	mm_debug_data[31:24] = r_address[27:20]; // r_address[27:20];
+	mm_debug_data[23:16] = rd_count;
+	mm_debug_data[15:0] = r_address[15:0];
 	
 	case(state)
 		IDLE: begin
@@ -307,6 +325,9 @@ always_comb begin
 				write_control_write_base = w_address;
 				write_user_buffer_data = wr_data;
 			end 
+		end
+		PAUSE: begin
+			mm_debug_data = nonce_found;
 		end
 		default: begin
 		end
