@@ -7,10 +7,11 @@ import math
 import hashlib
 
 def checkHash(ver,prev_block,mrkl_root,time,bits):
-    f = open('hash.txt','r');
-    nonce = f.readline();
-    nonce.strip();
-    nonce = int(nonce);
+  #  f = open('hash.txt','r');
+  #  nonce = f.readline();
+  #  nonce.strip();
+  #  nonce = int(nonce);
+    nonce = 990370605;
     header = (struct.pack("<L", int(ver)) + prev_block.decode('hex')[::-1] + mrkl_root.decode('hex')[::-1] + struct.pack("<LLL", int(time), int(bits), int(nonce)));
     header_bin = header;
     #header_bin = header.decode('hex');
@@ -18,6 +19,7 @@ def checkHash(ver,prev_block,mrkl_root,time,bits):
      print "Chunk %d : 32'h%s;" % (i,header_bin[i*8:(i+1)*8]);
     hash = hashlib.sha256(hashlib.sha256(header_bin).digest()).digest()
     hash = hash[::-1].encode('hex');
+    print hash
     if(int(hash,16) < findTarget(bits)):
         return True
     else:
@@ -36,4 +38,4 @@ def findTarget(bits):
     #print hex(targetVal);
 
 
-checkHash(2,"00000000000000001af51dcc599ca5c8ca80f823a7ab2400e301e7bfc129e940","c400ab7d5b0b274bcc8275945f82a3f807cf5d271350fe4b777fc5a4feea6ec1",1417549430,404441185);
+print checkHash(2,"0000000000000000098ed12e54156f30b2fae4c8cc0da5389cf8f1c6f42d3751","8e192530f5a7e4a4e5b9dd1d2f029cb92c03d8e4eccfeeb40ebc9e524fe57317",1418212969,404454260);

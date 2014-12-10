@@ -96,9 +96,18 @@ def process(ver,prev_block,mrkl_root,time,bits,nonce = 0):
    midState.append(h6);
    midState.append(h7);
 
+   print midState
+   print remainingHeader
    return (midState, remainingHeader);
-   #print midState;
-   #print remainingHeader
+ 
 
-print process(2,"00000000000000001af51dcc599ca5c8ca80f823a7ab2400e301e7bfc129e940","c400ab7d5b0b274bcc8275945f82a3f807cf5d271350fe4b777fc5a4feea6ec1",1417549430,404441185);
+(midState,remainingHeader) = process(2,"000000000000000013c0ed93516eed6311d72b65437802fa9f39017e94bc040b","d1ad48f41711869150b9e3215fe9a311c8c963142712e8455b8743c213364eb8",1418206648,404454260);
 
+f = open('block1.txt','w');
+
+for i in range(8):
+   f.write(str(midState[7-i])+'\n');
+for i in range(16):
+   f.write(str(remainingHeader[15-i])+'\n');
+
+f.close();
