@@ -101,7 +101,7 @@ def process(ver,prev_block,mrkl_root,time,bits,nonce = 0):
    return (midState, remainingHeader);
  
 
-(midState,remainingHeader) = process(2,"000000000000000013c0ed93516eed6311d72b65437802fa9f39017e94bc040b","d1ad48f41711869150b9e3215fe9a311c8c963142712e8455b8743c213364eb8",1418206648,404454260);
+(midState,remainingHeader) = process(2,"00000000000000001b24f1e2ed553f5b1ea1e57391b6166be523dcff4fadd500","7405ef070b843244c9b7b11cb4137403a9ede4162b91661de94d3a403c9a397d",1418304289,404454260); #3145195360
 
 f = open('block1.txt','w');
 
@@ -111,3 +111,49 @@ for i in range(16):
    f.write(str(remainingHeader[15-i])+'\n');
 
 f.close();
+
+(midState,remainingHeader) = process(2,"0000000000000000147d2e037c36758cad7766776f3cda4b410c13ef6940450c","466988bb8d1dd20b8f3191b417205dd0c0fbe0ff65d4df3959503f550467dd71",1418303507,404454260); #3320476258
+
+f = open('block2.txt','w');
+
+for i in range(8):
+   f.write(str(midState[7-i])+'\n');
+for i in range(16):
+   f.write(str(remainingHeader[15-i])+'\n');
+
+f.close();
+
+(midState,remainingHeader) = process(2,"000000000000000013d92aa75332c45216263abb4791a1ffa500937659dea39c","8f7291f943fdc955f95bae43dabb498e6028495ddb32905ee9ae42da75adb588",1418298192,404454260); #1817244012
+
+f = open('block3.txt','w');
+
+for i in range(8):
+   f.write(str(midState[7-i])+'\n');
+for i in range(16):
+   f.write(str(remainingHeader[15-i])+'\n');
+
+f.close();
+
+(midState,remainingHeader) = process(2,"000000000000000018e69a7966bcbb5d90830f1f423c06e91f0926fd5c4fc58a","5f68edbc46ceb6c4c8ad02a0ce75c1a37843d0f9cd1e4c1facb9778cda364c3f",1418292662,404454260); #3410099896
+
+f = open('block4.txt','w');
+
+for i in range(8):
+   f.write(str(midState[7-i])+'\n');
+for i in range(16):
+   f.write(str(remainingHeader[15-i])+'\n');
+
+f.close();
+
+(midState,remainingHeader) = process(2,"00000000000000001b17bf5332fda9558ab0ac3eee7be3a8e9f7b076704570c9","9197defd4afedaa6884765a3072dbdf894539a14d062212646edd7de631a6e1b",1418294221,404454260); #3504277341
+
+f = open('block5.txt','w');
+
+for i in range(8):
+   f.write(str(midState[7-i])+'\n');
+for i in range(16):
+   f.write(str(remainingHeader[15-i])+'\n');
+
+f.close();
+
+

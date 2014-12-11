@@ -75,7 +75,7 @@ module design_core (
     .parallel_out(headData)
   );
   
-  sha_block #(32) SHA (
+  sha_block #(16) SHA (
     .clk(clk),
     .midState(midData),
     .headData(headData),

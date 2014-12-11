@@ -11,7 +11,7 @@ def checkHash(ver,prev_block,mrkl_root,time,bits):
   #  nonce = f.readline();
   #  nonce.strip();
   #  nonce = int(nonce);
-    nonce = 990370605;
+    nonce = 3659389909;
     header = (struct.pack("<L", int(ver)) + prev_block.decode('hex')[::-1] + mrkl_root.decode('hex')[::-1] + struct.pack("<LLL", int(time), int(bits), int(nonce)));
     header_bin = header;
     #header_bin = header.decode('hex');
@@ -38,4 +38,4 @@ def findTarget(bits):
     #print hex(targetVal);
 
 
-print checkHash(2,"0000000000000000098ed12e54156f30b2fae4c8cc0da5389cf8f1c6f42d3751","8e192530f5a7e4a4e5b9dd1d2f029cb92c03d8e4eccfeeb40ebc9e524fe57317",1418212969,404454260);
+print checkHash(2,"00000000000000001b24f1e2ed553f5b1ea1e57391b6166be523dcff4fadd500","7405ef070b843244c9b7b11cb4137403a9ede4162b91661de94d3a403c9a397d",1418304289,404454260); #31451953602
