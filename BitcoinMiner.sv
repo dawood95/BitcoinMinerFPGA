@@ -205,7 +205,7 @@ amm_master_qsys_with_pcie amm_master_inst  (
 // TOP LEVEL
 design_core design_core_inst (
 	.clk(soc_clk), 
-	.n_rst(KEY[1]), 
+	.n_rst(KEY[0]), 
 	.start_found(start_found),
 	.shift_in_enable(shift_in_enable),
 	.sol_response(sol_response),

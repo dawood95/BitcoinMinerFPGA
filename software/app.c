@@ -14,116 +14,80 @@
 //BASE ADDRESS TO SDRAM
 #define SDRAM 0x08000000
 
+// data to write
+#define DATA_SIZE 26 
+
 #define RWSIZE (32 / 8)
 PCIE_BAR pcie_bars[] = { PCIE_BAR0, PCIE_BAR1 , PCIE_BAR2 , PCIE_BAR3 , PCIE_BAR4 , PCIE_BAR5 };
 
-void test32( PCIE_HANDLE hPCIe, DWORD addr );
-void testDMA( PCIE_HANDLE hPCIe, DWORD addr);
+// void test32( PCIE_HANDLE hPCIe, DWORD addr );
+void writeDMA( PCIE_HANDLE hPCIe, DWORD addr, DWORD * blocks);
 
 int main(void)
 {
-	void *lib_handle;
-	PCIE_HANDLE hPCIe;
+        void *lib_handle;
+        PCIE_HANDLE hPCIe;
+        DWORD bitcoin_blocks[DATA_SIZE];
 
-	lib_handle = PCIE_Load();
-	if (!lib_handle)
-	{
-		printf("PCIE_Load failed\n");
-		return 0;
-	}
-	hPCIe = PCIE_Open(0,0,0);
+        lib_handle = PCIE_Load();
+        if (!lib_handle)
+        {
+                printf("PCIE_Load failed\n");
+                return 0;
+        }
+        hPCIe = PCIE_Open(0,0,0);
 
-	if (!hPCIe)
-	{
-		printf("PCIE_Open failed\n");
-		return 0;
-	}
+        if (!hPCIe)
+        {
+                printf("PCIE_Open failed\n");
+                return 0;
+        }
 
-	//test CRA
-	test32(hPCIe, CRA);
+        FILE * inFile = fopen("block1.txt","r");
+        if(inFile == NULL) exit(0);
 
-	//test SDRAM
-	testDMA(hPCIe,SDRAM);
-	return 0;
-}
+        int i = 0;
+        unsigned long int val = 0;
+        bitcoin_blocks[0] = 0xAAAA0000;
+        bitcoin_blocks[1] = 0x0;
 
-//Tests 16 consecutive PCIE_Write32 to address
+        for (i = 0; i < DATA_SIZE - 2; i++) {
+                printf("%d : ", i);
+                fscanf(inFile,"%lu\n",&val);
+                bitcoin_blocks[i+2] = val;
+                printf("%x\n",bitcoin_blocks[i+2]);
+                printf("%x\n",val);
+        }
 
-void test32( PCIE_HANDLE hPCIe, DWORD addr )
-{
-	BOOL bPass;
-	DWORD testVal = 0xf;
-	DWORD readVal;
-
-	WORD i = 0;
-	for (i = 0; i < 16 ; i++ )
-	{
-		printf("Testing register %d at addr %x with value %x\n", i, addr, testVal);
-		bPass = PCIE_Write32( hPCIe, pcie_bars[0], addr, testVal);
-		if (!bPass)
-		{
-			printf("test FAILED: write did not return success");
-			return;
-		}
-		bPass = PCIE_Read32( hPCIe, pcie_bars[0], addr, &readVal);
-		if (!bPass)
-		{
-			printf("test FAILED: read did not return success");
-			return;
-		}
-		if (testVal == readVal)
-		{
-			printf("Test PASSED: expected %x, received %x\n", testVal, readVal);
-		}
-		else
-		{
-			printf("Test FAILED: expected %x, received %x\n", testVal, readVal);
-		}
-		testVal = testVal + 1;
-		addr = addr + 4;
-	}
-	return;
+        // write header to SDRAM
+        writeDMA(hPCIe, SDRAM, bitcoin_blocks);
+        return 0;
 }
 
 //tests DMA write of buffer to address
-void testDMA( PCIE_HANDLE hPCIe, DWORD addr)
+void writeDMA( PCIE_HANDLE hPCIe, DWORD addr, DWORD * bitcoin_blocks)
 {
-	BOOL bPass;
-	DWORD testArray[MAXDMA];
-	DWORD readArray[MAXDMA];
-	
-	WORD i = 0;
-	
-	while ( i < MAXDMA )
-	{
-		testArray[i] = i  + 0xfd;
-		i++;
-	}
+        BOOL bPass1, bPass2;
+        DWORD addr1 = SDRAM;
+        DWORD addr2 = SDRAM + 2 * DATA_SIZE; // 56 bytes later
+        size_t amt_to_write = DATA_SIZE / 2 * RWSIZE;
 
-	bPass = PCIE_DmaWrite(hPCIe, addr, testArray, MAXDMA * RWSIZE );
-	if (!bPass)
-	{
-		printf("test FAILED: write did not return success");
-		return;
-	}
-	bPass = PCIE_DmaRead(hPCIe, addr, readArray, MAXDMA * RWSIZE );
-	if (!bPass)
-	{
-		printf("test FAILED: read did not return success");
-		return;
-	}
-	i = 0;
-	while ( i < MAXDMA )
-	{
-		if (testArray[i] == readArray[i])
-		{
-			printf("Test PASSED: expected %x, received %x\n", testArray[i], readArray[i]);
-		}
-		else
-		{
-			printf("Test FAILED: expected %x, received %x\n", testArray[i], readArray[i]);
-		}
-		i++;
-	}
-	return;
+        // write first half of bitcoin data array
+        bPass1 = PCIE_DmaWrite(hPCIe, addr1, bitcoin_blocks, amt_to_write);
+        if (!bPass1)
+        {
+                printf("1st half bitcoin block array write failed");
+                return;
+        }
+
+        // write second half of bitcoin data array, account for last word
+        bPass2 = PCIE_DmaWrite(hPCIe, addr2, bitcoin_blocks + 12, amt_to_write + 4);
+        if (!bPass2)
+        {
+                printf("2nd half bitcoin block array write failed");
+                return;
+        }
+
+        return;
 }
+
