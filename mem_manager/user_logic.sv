@@ -371,7 +371,7 @@ always_comb begin
 		end
 		PAUSE: begin
 			loc_mm_debug_next = 1'b01;
-			nextState = PAUSE;
+			nextState = WATCH_NONCE;
 		end
 		default: begin
 		end
