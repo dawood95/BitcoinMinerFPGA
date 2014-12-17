@@ -1,0 +1,56 @@
+Summary report for BitcoinMiner
+Tue Dec 16 22:13:43 2014
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                          ;
++------------------------------------+--------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Tue Dec 16 07:52:42 2014            ;
+; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
+; Revision Name                      ; BitcoinMiner                                     ;
+; Top-level Entity Name              ; BitcoinMiner                                     ;
+; Family                             ; Cyclone IV GX                                    ;
+; Total logic elements               ; 111,478                                          ;
+;     Total combinational functions  ; 107,333                                          ;
+;     Dedicated logic registers      ; 45,318                                           ;
+; Total registers                    ; 45318                                            ;
+; Total pins                         ; 111                                              ;
+; Total virtual pins                 ; 0                                                ;
+; Total memory bits                  ; 195,816                                          ;
+; Embedded Multiplier 9-bit elements ; 0                                                ;
+; Total GXB Receiver Channel PCS     ; 1                                                ;
+; Total GXB Receiver Channel PMA     ; 1                                                ;
+; Total GXB Transmitter Channel PCS  ; 1                                                ;
+; Total GXB Transmitter Channel PMA  ; 1                                                ;
+; Total PLLs                         ; 2                                                ;
++------------------------------------+--------------------------------------------------+
+
+

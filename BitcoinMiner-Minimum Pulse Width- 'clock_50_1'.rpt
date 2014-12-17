@@ -1,0 +1,140 @@
+Minimum Pulse Width: 'clock_50_1' report for BitcoinMiner
+Tue Dec 16 22:15:28 2014
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Slow 1200mV 0C Model Minimum Pulse Width: 'clock_50_1'
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow 1200mV 0C Model Minimum Pulse Width: 'clock_50_1'                                                                                                                                   ;
++-------+--------------+----------------+------------------+------------+------------+-----------------------------------------------------------------------------------------------------+
+; Slack ; Actual Width ; Required Width ; Type             ; Clock      ; Clock Edge ; Target                                                                                              ;
++-------+--------------+----------------+------------------+------------+------------+-----------------------------------------------------------------------------------------------------+
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[24]  ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[29]  ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[56]  ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[159] ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[208] ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[223] ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[261] ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[272] ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[274] ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[278] ;
+; 9.707 ; 9.925        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[91]  ;
+; 9.709 ; 9.927        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[151] ;
+; 9.709 ; 9.927        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[154] ;
+; 9.709 ; 9.927        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[155] ;
+; 9.709 ; 9.927        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[22]  ;
+; 9.709 ; 9.927        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[25]  ;
+; 9.709 ; 9.927        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[26]  ;
+; 9.709 ; 9.927        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[27]  ;
+; 9.709 ; 9.927        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[31]  ;
+; 9.711 ; 9.929        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[34]  ;
+; 9.712 ; 9.930        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[143] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[25]  ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[57]  ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[131] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[137] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[146] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[153] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[204] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[206] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[210] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[221] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[275] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[285] ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[29]  ;
+; 9.714 ; 9.932        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[339] ;
+; 9.715 ; 9.933        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[42]  ;
+; 9.715 ; 9.933        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[152] ;
+; 9.715 ; 9.933        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[276] ;
+; 9.716 ; 9.934        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[41]  ;
+; 9.716 ; 9.934        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[49]  ;
+; 9.716 ; 9.934        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[52]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[135] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[140] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[142] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[148] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[149] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[154] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[155] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[156] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[157] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[159] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[187] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[189] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[18]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[190] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[20]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[27]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[33]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[40]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[4]   ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[61]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[9]   ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[130] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[135] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[158] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[198] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[203] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[219] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[21]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[220] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[222] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[256] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[258] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[271] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[281] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[286] ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[30]  ;
+; 9.717 ; 9.935        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[403] ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[144] ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[145] ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[150] ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[152] ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[153] ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[158] ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[182] ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[30]  ;
+; 9.718 ; 9.936        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[51]  ;
+; 9.719 ; 9.937        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[23]  ;
+; 9.719 ; 9.937        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[55]  ;
+; 9.719 ; 9.937        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[132] ;
+; 9.719 ; 9.937        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[136] ;
+; 9.719 ; 9.937        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[196] ;
+; 9.719 ; 9.937        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[200] ;
+; 9.719 ; 9.937        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[385] ;
+; 9.719 ; 9.937        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|h4[0]            ;
+; 9.720 ; 9.938        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[17]  ;
+; 9.720 ; 9.938        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[1]   ;
+; 9.720 ; 9.938        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentData[8]   ;
+; 9.720 ; 9.938        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[289] ;
+; 9.720 ; 9.938        ; 0.218          ; High Pulse Width ; clock_50_1 ; Rise       ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|sha256:sha256Block|currentWord[369] ;
++-------+--------------+----------------+------------------+------------+------------+-----------------------------------------------------------------------------------------------------+
+
+

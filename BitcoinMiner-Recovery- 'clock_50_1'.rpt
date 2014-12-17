@@ -1,0 +1,140 @@
+Recovery: 'clock_50_1' report for BitcoinMiner
+Tue Dec 16 22:15:10 2014
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Slow 1200mV 0C Model Recovery: 'clock_50_1'
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow 1200mV 0C Model Recovery: 'clock_50_1'                                                                                                                                                                                                           ;
++--------+----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                      ; To Node                                                                                               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 14.066 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[14] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.120     ; 5.813      ;
+; 14.155 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[20]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.713      ;
+; 14.155 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[4]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.713      ;
+; 14.155 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[4]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.713      ;
+; 14.269 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[28] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.141     ; 5.589      ;
+; 14.269 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[21] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.141     ; 5.589      ;
+; 14.269 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[21]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.141     ; 5.589      ;
+; 14.284 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[14] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.120     ; 5.595      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[30] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[30]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[31] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[29] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[29]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[27] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[19] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[19]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[9]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[11] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[11]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[0]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.298 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[0]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.561      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[22] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[22]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[26] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[26]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[17]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[6]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[6]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[7]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[7]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[5]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[5]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[3]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[3]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[2]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.325 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[2]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.548      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[23] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[23]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[25] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[24] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[24]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[17] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[8]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[8]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[10] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[10]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[13] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[13]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[12] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[12]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[1]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.344 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[1]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.529      ;
+; 14.373 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[20]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.495      ;
+; 14.373 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[4]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.495      ;
+; 14.373 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[4]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.495      ;
+; 14.414 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[28]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.454      ;
+; 14.414 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[31]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.454      ;
+; 14.414 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[27]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.131     ; 5.454      ;
+; 14.487 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[28] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.141     ; 5.371      ;
+; 14.487 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[21] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.141     ; 5.371      ;
+; 14.487 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[21]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.141     ; 5.371      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[30] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[30]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[31] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[29] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[29]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[27] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[19] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[19]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[9]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[11] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[11]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[0]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.516 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[0]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.140     ; 5.343      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[22] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[22]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[26] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[26]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[17]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[6]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[6]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[7]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[7]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[5]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[5]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[3]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[3]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[2]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.543 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[2]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.330      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[23] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[23]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[25] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[24] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[24]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[17] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[8]  ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[8]                     ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[10] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_output_manager:outputManager|rf[10]                    ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
+; 14.562 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[13] ; clock_50_1   ; clock_50_1  ; 20.000       ; -0.126     ; 5.311      ;
++--------+----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+

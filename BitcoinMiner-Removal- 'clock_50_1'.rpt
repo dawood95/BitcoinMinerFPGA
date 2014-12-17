@@ -1,0 +1,140 @@
+Removal: 'clock_50_1' report for BitcoinMiner
+Tue Dec 16 22:15:13 2014
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Slow 1200mV 0C Model Removal: 'clock_50_1'
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow 1200mV 0C Model Removal: 'clock_50_1'                                                                                                                                                                                                           ;
++-------+----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                                                      ; To Node                                                                                               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 1.476 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[0]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.729      ;
+; 1.476 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[1]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.729      ;
+; 1.476 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[2]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.729      ;
+; 1.476 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[3]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.729      ;
+; 1.476 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[4]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.729      ;
+; 1.608 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[0]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.861      ;
+; 1.608 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[1]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.861      ;
+; 1.608 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[2]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.861      ;
+; 1.608 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[3]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.861      ;
+; 1.608 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[4]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 1.861      ;
+; 1.752 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[0]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 2.005      ;
+; 1.752 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[1]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 2.005      ;
+; 1.752 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[2]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 2.005      ;
+; 1.752 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[3]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 2.005      ;
+; 1.752 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|timer_proj:TMR|counter:CTR1|q_cnt[4]                                     ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.082      ; 2.005      ;
+; 2.139 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|cycleCounter:cycleCounter|counter:cntr|q_cnt[5]            ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.504      ; 2.814      ;
+; 2.693 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|sha_block:SHA|cycleCounter:cycleCounter|counter:cntr|q_cnt[5]            ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.504      ; 3.368      ;
+; 2.744 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[0][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.018      ;
+; 2.744 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[1][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.018      ;
+; 2.744 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[2][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.018      ;
+; 2.744 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[4][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.018      ;
+; 2.744 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[5][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.018      ;
+; 2.744 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[7][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.018      ;
+; 2.859 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|sha_block:SHA|cycleCounter:cycleCounter|counter:cntr|q_cnt[5]            ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.504      ; 3.534      ;
+; 2.876 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[0][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.150      ;
+; 2.876 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[1][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.150      ;
+; 2.876 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[2][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.150      ;
+; 2.876 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[4][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.150      ;
+; 2.876 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[5][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.150      ;
+; 2.876 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[7][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.150      ;
+; 2.943 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[3][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.105      ; 3.219      ;
+; 2.988 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|cycleCounter:cycleCounter|counter:cntr|q_cnt[0]            ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.113      ; 3.272      ;
+; 2.988 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|cycleCounter:cycleCounter|counter:cntr|q_cnt[1]            ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.113      ; 3.272      ;
+; 2.988 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|cycleCounter:cycleCounter|counter:cntr|q_cnt[2]            ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.113      ; 3.272      ;
+; 2.988 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|cycleCounter:cycleCounter|counter:cntr|q_cnt[3]            ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.113      ; 3.272      ;
+; 2.988 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|cycleCounter:cycleCounter|counter:cntr|q_cnt[4]            ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.113      ; 3.272      ;
+; 3.000 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[6][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.508      ; 3.679      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[0][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[1][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[2][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[3][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[4][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[5][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[6][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[7][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[8][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[10][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[11][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[12][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[13][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[14][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.013 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[15][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.277      ;
+; 3.020 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[0][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.294      ;
+; 3.020 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[1][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.294      ;
+; 3.020 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[2][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.294      ;
+; 3.020 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[4][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.294      ;
+; 3.020 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[5][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.294      ;
+; 3.020 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[7][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.103      ; 3.294      ;
+; 3.075 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[3][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.105      ; 3.351      ;
+; 3.132 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[6][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.508      ; 3.811      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[0][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[1][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[2][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[3][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[4][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[5][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[6][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[7][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[8][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[10][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[11][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[12][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[13][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[14][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.145 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[15][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.409      ;
+; 3.187 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[16] ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.102      ; 3.460      ;
+; 3.187 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[9]  ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.102      ; 3.460      ;
+; 3.187 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[15] ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.102      ; 3.460      ;
+; 3.188 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[20] ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.098      ; 3.457      ;
+; 3.188 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|sha_block:SHA|sha_core:cre[0].core|hash_checker:hashchk|nonce_stored[18] ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.098      ; 3.457      ;
+; 3.219 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[3][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.105      ; 3.495      ;
+; 3.249 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[0] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[9][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.107      ; 3.527      ;
+; 3.276 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_8:MID_SR|stp_sr:SR|parallel_out[6][0]                             ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.508      ; 3.955      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[0][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[1][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[2][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[3][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[4][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[5][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[6][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[7][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[8][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[10][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[11][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[12][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[13][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[14][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.289 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[15][0]                          ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.093      ; 3.553      ;
+; 3.381 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[2] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[9][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.107      ; 3.659      ;
+; 3.525 ; design_core:design_core_inst|controller_proj:CTRL|cur_state[1] ; design_core:design_core_inst|stp_sr_16:HEAD_SR|stp_sr:SR|parallel_out[9][0]                           ; clock_50_1   ; clock_50_1  ; 0.000        ; 0.107      ; 3.803      ;
++-------+----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
