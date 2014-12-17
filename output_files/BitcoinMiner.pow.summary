@@ -1,0 +1,12 @@
+PowerPlay Power Analyzer Status : Successful - Thu Dec 11 09:07:04 2014
+Quartus II 32-bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version
+Revision Name : BitcoinMiner
+Top-level Entity Name : BitcoinMiner
+Family : Cyclone IV GX
+Device : EP4CGX150DF31C7
+Power Models : Final
+Total Thermal Power Dissipation : 1476.89 mW
+Core Dynamic Thermal Power Dissipation : 1055.07 mW
+Core Static Thermal Power Dissipation : 384.22 mW
+I/O Thermal Power Dissipation : 37.60 mW
+Power Estimation Confidence : Low: user provided insufficient toggle rate data

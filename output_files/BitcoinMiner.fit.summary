@@ -1,0 +1,20 @@
+Fitter Status : Successful - Thu Dec 11 09:03:20 2014
+Quartus II 32-bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version
+Revision Name : BitcoinMiner
+Top-level Entity Name : BitcoinMiner
+Family : Cyclone IV GX
+Device : EP4CGX150DF31C7
+Timing Models : Final
+Total logic elements : 52,242 / 149,760 ( 35 % )
+    Total combinational functions : 41,809 / 149,760 ( 28 % )
+    Dedicated logic registers : 19,445 / 149,760 ( 13 % )
+Total registers : 19445
+Total pins : 114 / 508 ( 22 % )
+Total virtual pins : 0
+Total memory bits : 195,816 / 6,635,520 ( 3 % )
+Embedded Multiplier 9-bit elements : 0 / 720 ( 0 % )
+Total GXB Receiver Channel PCS : 1 / 8 ( 13 % )
+Total GXB Receiver Channel PMA : 1 / 8 ( 13 % )
+Total GXB Transmitter Channel PCS : 1 / 8 ( 13 % )
+Total GXB Transmitter Channel PMA : 1 / 8 ( 13 % )
+Total PLLs : 2 / 8 ( 25 % )
